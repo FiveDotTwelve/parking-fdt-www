@@ -1,0 +1,35 @@
+{
+    "display_information": {
+        "name": "FDTParkingBot",
+        "description": "FDT Parking Bot – View, reserve, and cancel parking spots quickly and easily.",
+        "background_color": "#333333"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "FDTParkingBot",
+            "always_online": true
+        },
+        "slash_commands": [
+            {
+                "command": "/login",
+                "url": "http://localhost:5000/slack/commands",
+                "description": "Connects your Slack account with Google to enable parking reservations.",
+                "usage_hint": "Type /login to authorize your Google account.",
+                "should_escape": false
+            }
+        ]
+    },
+    "oauth_config": {
+        "scopes": {
+            "bot": [
+                "chat:write",
+                "commands"
+            ]
+        }
+    },
+    "settings": {
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}
