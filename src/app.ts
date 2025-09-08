@@ -27,5 +27,5 @@ const app = new App({
 
 (async () => {
   await app.start(process.env.PORT || 5000);
-  console.log('⚡ Slack bot running with ExpressReceiver!');
+  console.log('⚡ FDTParkingBot  bot running with ExpressReceiver!');
 })();
