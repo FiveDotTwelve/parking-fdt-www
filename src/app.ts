@@ -1,31 +1,14 @@
-import { App, ExpressReceiver } from "@slack/bolt";
-import { ENV } from "./utils/env";
-
-const receiver = new ExpressReceiver({
-  signingSecret: ENV.SLACK_SIGNING_SECRET,
-  endpoints: '/slack/commands',
-});
-
-const app = new App({
-  token: ENV.SLACK_BOT_TOKEN,
-  receiver,
-});
+import { app, receiver } from "./config/slack";
+import { authRouter } from "./routes";
+import { CommandManager } from "./slack";
 
 
-// receiver.app.post('/slack/commands', (req, res) => {
-//   console.log('Slash command received!', req.body);
-//   res.send('✅ Otrzymano komendę!');
-// });
+receiver.app.use('/api', authRouter);
 
-// app.command('/hello', async ({ command, ack, respond }) => {
-//   await ack();
-//   await respond({
-//     response_type: 'ephemeral',
-//     text: `Cześć <@${command.user_id}>! :wave: Miło Cię widzieć!`,
-//   });
-// });
+CommandManager.login();
+CommandManager.show();
 
 (async () => {
   await app.start(process.env.PORT || 5000);
-  console.log('⚡ FDTParkingBot  bot running with ExpressReceiver!');
+  console.log('⚡ FDTParkingBot bot running with ExpressReceiver!');
 })();

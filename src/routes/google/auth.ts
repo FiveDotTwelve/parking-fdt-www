@@ -1,21 +1,23 @@
 import { Router } from 'express';
-import { getTokenFromCode } from '../../config/google';
+import { tokenManager } from '../../utils/tokenManager';
+import { app } from '../../config/slack';
 
 const authRouter = Router();
 
 authRouter.get('/auth/google/callback', async (req, res) => {
   try {
     const code = req.query.code as string;
-    if (!code) return res.status(400).json({ message: 'No authorization code in the query.' });
+    const slackUserId = req.query.state as string;
 
-    const tokens = await getTokenFromCode(code);
+    if (!code || !slackUserId) return res.status(400).json({ message: 'Missing code or state.' });
 
-    console.log('Tokens obtained:', {
-      access_token: tokens.access_token,
-      refresh_token: tokens.refresh_token ? 'SAVED' : 'NOT SAVED',
+    await tokenManager.getTokenFromCode(code, slackUserId);
+
+    await app.client.chat.postMessage({
+      channel: slackUserId, 
+      text: '✅ Google authorization successful! You can now book your parking spot directly from Slack.',
     });
 
-    res.redirect('/');
   } catch (error) {
     console.error('Google OAuth callback error:', error);
     res.status(500).json({ message: 'Error during Google authorization.' });
