@@ -13,3 +13,6 @@ yarn-error.log*
 # env files
 .env
 .env-local
+
+
+/src/config/google/users.json

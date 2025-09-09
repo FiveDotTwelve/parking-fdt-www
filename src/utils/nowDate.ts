@@ -1,11 +1,12 @@
 export function getCurrentWeekRange() {
   const now = new Date();
 
-  const day = now.getDay(); 
-  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const day = now.getDay();
+  
+  const diffToMonday = (day + 6) % 7; 
 
   const startOfWeek = new Date(now);
-  startOfWeek.setDate(now.getDate() + diffToMonday);
+  startOfWeek.setDate(now.getDate() - diffToMonday);
   startOfWeek.setHours(0, 0, 0, 0);
 
   const endOfWeek = new Date(startOfWeek);

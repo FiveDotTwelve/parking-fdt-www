@@ -8,8 +8,16 @@ import { Parking } from '../models/parking';
 
 export function Show() {
   app.command('/show', async ({ command, ack, respond }) => {
-    await ack();
+    if (!tokenManager.getUserRefreshToken(command.user_id)) {
+      await ack();
+      await respond({
+        response_type: 'ephemeral',
+        text: 'You must be logged in via Google Auth. Use the /login command.',
+      });
+      return;
+    }
 
+    await ack();
     tokenManager.setCredentialsForUser(command.user_id);
 
     try {
@@ -26,6 +34,8 @@ export function Show() {
       const events = response.data.items || [];
 
       const parking: Parking[] = events.map((ev) => {
+        const isAllDay = !!ev.start?.date && !!ev.end?.date;
+
         return {
           summary: ev.summary || 'No Title',
           start: {
@@ -39,13 +49,14 @@ export function Show() {
             timeZone: 'Europe/Warsaw',
           },
           isFree: ev.transparency === 'transparent',
+          isAllDay,
         };
       });
 
       const blocks = createParkingBlocks(parking);
 
       await respond({
-        response_type: 'in_channel',
+        response_type: 'ephemeral',
         blocks,
       });
     } catch (error) {
