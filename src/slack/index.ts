@@ -1,7 +1,5 @@
-import { Login } from "./commands/login";
-import { Show } from "./commands/show";
+import { List } from './commands/list';
 
 export const CommandManager = {
-    login: () => Login(),
-    show: () => Show(),
+  list: () => List(),
 };

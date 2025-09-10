@@ -1,9 +1,12 @@
-import { App, ExpressReceiver } from "@slack/bolt";
-import { ENV } from "../../utils/env";
+import { App, ExpressReceiver } from '@slack/bolt';
+import { ENV } from '../../utils/env';
 
 const receiver = new ExpressReceiver({
   signingSecret: ENV.SLACK_SIGNING_SECRET,
-  endpoints: '/slack/commands',
+  endpoints: {
+    commands: '/slack/commands',   
+    actions: '/slack/actions', 
+  },
 });
 
 const app = new App({
@@ -11,4 +14,4 @@ const app = new App({
   receiver,
 });
 
-export {app, receiver}
+export { app, receiver };

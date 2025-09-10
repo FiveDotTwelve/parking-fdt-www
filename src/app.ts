@@ -1,12 +1,11 @@
-import { app, receiver } from "./config/slack";
-import { authRouter } from "./routes";
-import { CommandManager } from "./slack";
-
+import { app,receiver } from './config/slack';
+import { CommandManager } from './slack';
+import authRouter from './routes';
 
 receiver.app.use('/api', authRouter);
 
-CommandManager.login();
-CommandManager.show();
+CommandManager.list();
+
 
 (async () => {
   await app.start(process.env.PORT || 5000);
