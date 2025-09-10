@@ -1,14 +1,17 @@
-import { receiver } from './config/slack';
+import { app,receiver } from './config/slack';
 import { CommandManager } from './slack';
 import authRouter from './routes';
-import serverless from 'serverless-http';
+import { ENV } from './utils/env';
 
 receiver.app.use('/api', authRouter);
 
 CommandManager();
 
-receiver.app.get('/', async (req, res) => {
-  res.send("Hello from Express on Vercel!");
+receiver.app.get('/api/hello', async (req, res) => {
+  res.send('Hello from Express');
 });
 
-export default serverless(receiver.app);
+(async () => {
+  await app.start(ENV.PORT);
+  console.log('⚡ FDTParkingBot bot running with ExpressReceiver!');
+})();
