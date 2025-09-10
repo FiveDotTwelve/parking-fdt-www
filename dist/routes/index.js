@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const google_1 = require("../config/google");
 const express_1 = require("express");
-const kv_1 = require("../utils/kv");
+const json_1 = require("../utils/json");
 const slack_1 = require("../config/slack");
 const authRouter = (0, express_1.Router)();
 authRouter.get('/auth/google/callback', async (req, res) => {
@@ -13,9 +13,9 @@ authRouter.get('/auth/google/callback', async (req, res) => {
             return res.status(400).json({ message: 'Missing code or state.' });
         const { tokens } = await google_1.oauth2Client.getToken(code);
         if (tokens.refresh_token) {
-            const data = (await (0, kv_1.readToken)(slackUserId));
-            data.refresh_token = tokens.refresh_token;
-            await (0, kv_1.saveToken)(slackUserId, data);
+            const data = (0, json_1.readToken)();
+            data[slackUserId] = { refreshToken: tokens.refresh_token };
+            (0, json_1.saveToken)(data);
         }
         await slack_1.app.client.chat.postMessage({
             channel: slackUserId,

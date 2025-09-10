@@ -1,6 +1,6 @@
 import { getAuthUrl } from '../../config/google';
 import { app } from '../../config/slack';
-import { checkCredentials } from '../../utils/kv';
+import { checkCredentials } from '../../utils/json';
 
 export function Login() {
   app.command('/login', async ({ command, ack, respond }) => {

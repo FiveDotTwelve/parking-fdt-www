@@ -17,3 +17,5 @@ yarn-error.log*
 
 /src/config/google/tokens.json
 .vercel
+/dist
+dist

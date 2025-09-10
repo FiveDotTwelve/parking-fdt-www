@@ -1,8 +1,7 @@
 import { oauth2Client } from '../config/google';
 import { Router } from 'express';
-import { readToken, saveToken } from '../utils/kv';
+import { readToken, saveToken } from '../utils/json';
 import { app } from '../config/slack';
-import { GoogleToken } from '../types/google';
 
 const authRouter = Router();
 
@@ -16,9 +15,9 @@ authRouter.get('/auth/google/callback', async (req, res) => {
     const { tokens } = await oauth2Client.getToken(code);
 
     if (tokens.refresh_token) {
-      const data = (await readToken(slackUserId)) as GoogleToken;
-      data.refresh_token = tokens.refresh_token;
-      await saveToken(slackUserId, data);
+      const data = readToken();
+      data[slackUserId] = { refreshToken: tokens.refresh_token };
+      saveToken(data);
     }
 
     await app.client.chat.postMessage({

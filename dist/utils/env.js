@@ -14,5 +14,6 @@ const envSchema = zod_1.z.object({
     GOOGLE_CALENDAR_ID: zod_1.z.string(),
     SLACK_BOT_TOKEN: zod_1.z.string(),
     SLACK_SIGNING_SECRET: zod_1.z.string(),
+    PORT: zod_1.z.string(),
 });
 exports.ENV = envSchema.parse(process.env);

@@ -7,7 +7,7 @@ const receiver = new bolt_1.ExpressReceiver({
     signingSecret: env_1.ENV.SLACK_SIGNING_SECRET,
     endpoints: {
         commands: '/slack/commands',
-        actions: '/slack/actions',
+        actions: '/slack/actions'
     },
 });
 exports.receiver = receiver;
