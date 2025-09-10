@@ -7,7 +7,7 @@ receiver.app.use('/api', authRouter);
 
 CommandManager();
 
-receiver.app.get('/api/hello', async (req, res) => {
+receiver.app.get('/', async (req, res) => {
   res.send("Hello from Express on Vercel!");
 });
 
