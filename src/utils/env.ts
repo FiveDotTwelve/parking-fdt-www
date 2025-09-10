@@ -11,6 +11,7 @@ const envSchema = z.object({
   GOOGLE_CALENDAR_ID: z.string(),
   SLACK_BOT_TOKEN: z.string(),
   SLACK_SIGNING_SECRET: z.string(),
+  PORT: z.string(),
 });
 
 type Env = z.infer<typeof envSchema>;
