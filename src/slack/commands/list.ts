@@ -11,7 +11,7 @@ export async function List() {
           type: 'header',
           text: {
             type: 'plain_text',
-            text: 'Here is the list of commands',
+            text: 'List of Available Commands',
             emoji: true,
           },
         },
@@ -30,7 +30,7 @@ export async function List() {
                     { type: 'text', text: '/list ' },
                     {
                       type: 'text',
-                      text: '- display all commands.',
+                      text: '- Show all commands.',
                       style: { bold: true },
                     },
                   ],
@@ -41,7 +41,7 @@ export async function List() {
                     { type: 'text', text: '/login ' },
                     {
                       type: 'text',
-                      text: '- Connects Slack with Google to book parking spots.',
+                      text: "- Connect your Slack to Google to book parking.",
                       style: { bold: true },
                     },
                   ],
@@ -52,18 +52,18 @@ export async function List() {
                     { type: 'text', text: '/show ' },
                     {
                       type: 'text',
-                      text: '- Displays available and occupied parking spaces.',
+                      text: "- See which parking spots are free or taken.",
                       style: { bold: true },
                     },
                   ],
                 },
-                                {
+                {
                   type: 'rich_text_section',
                   elements: [
                     { type: 'text', text: '/reserve ' },
                     {
                       type: 'text',
-                      text: '- Reserves a parking spot in FDT Parking and adds it to your Google Calendar.',
+                      text: "- Reserve a parking spot and add it to your Google Calendar.",
                       style: { bold: true },
                     },
                   ],

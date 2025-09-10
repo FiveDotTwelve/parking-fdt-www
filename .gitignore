@@ -15,4 +15,5 @@ yarn-error.log*
 .env-local
 
 
-/src/config/google/users.json
+/src/config/google/tokens.json
+.vercel

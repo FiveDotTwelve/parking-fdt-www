@@ -4,8 +4,11 @@ import authRouter from './routes';
 
 receiver.app.use('/api', authRouter);
 
-CommandManager.list();
+CommandManager();
 
+receiver.app.get('/', async (req, res) => {
+  res.send('Hello World');
+});
 
 (async () => {
   await app.start(process.env.PORT || 5000);

@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import { ENV } from '../../utils/env';
 import dotenv from 'dotenv';
-
+import path from 'path';
 dotenv.config();
 
 export const oauth2Client = new google.auth.OAuth2(
@@ -12,6 +12,8 @@ export const oauth2Client = new google.auth.OAuth2(
 
 export const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 
+export const TOKEN_PATH = path.join(__dirname, 'tokens.json');
+
 export const getAuthUrl = (slackUserId: string) =>
   oauth2Client.generateAuthUrl({
     access_type: 'offline',
@@ -19,10 +21,5 @@ export const getAuthUrl = (slackUserId: string) =>
     prompt: 'consent',
     state: slackUserId,
   });
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setCredentials = (tokens: any) => {
-  oauth2Client.setCredentials(tokens);
-};
 
 export const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
