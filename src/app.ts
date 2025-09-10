@@ -6,9 +6,10 @@ receiver.app.use('/api', authRouter);
 
 CommandManager();
 
-receiver.app.get('/', async (req, res) => {
+receiver.app.get('/api/hello', async (req, res) => {
   res.send('Hello World');
 });
+
 
 (async () => {
   await app.start(process.env.PORT || 5000);
