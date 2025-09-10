@@ -4,11 +4,11 @@ import authRouter from './routes';
 
 receiver.app.use('/api', authRouter);
 
-CommandManager();
-
-receiver.app.get('/api/hello', async (req, res) => {
+receiver.app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from Express on Vercel!' });
 });
+
+CommandManager();
 
 // (async () => {
 //   const port = Number(ENV.PORT);
@@ -16,5 +16,5 @@ receiver.app.get('/api/hello', async (req, res) => {
 //   console.log(`⚡ FDTParkingBot running on port ${port}`);
 // })();
 
-export default receiver.app;
 
+export default receiver.app;

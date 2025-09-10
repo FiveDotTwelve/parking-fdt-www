@@ -6,6 +6,7 @@ const receiver = new ExpressReceiver({
   endpoints: {
     commands: '/slack/commands',   
     actions: '/slack/actions', 
+    api: '/api'
   },
 });
 
