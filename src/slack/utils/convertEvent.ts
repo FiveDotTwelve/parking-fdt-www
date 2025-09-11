@@ -1,11 +1,13 @@
-import { GoogleEvent } from "../../models/google-event";
-import { Parking } from "../models/slack-event";
+import { GoogleEvent } from '../../models/google-event';
+import { Parking } from '../models/slack-event';
 
-export default function convertCalendarEvent(ev: GoogleEvent) : Parking {
-    return {
+export default function convertCalendarEvent(ev: GoogleEvent): Parking {
+  const startDate = ev.start?.date || ev.start?.dateTime?.slice(0, 10);
+
+  return {
     summary: ev.summary ?? undefined,
-    start: ev.start?.date || ev.start?.dateTime || undefined,
-    end: ev.end?.date || ev.end?.dateTime || undefined,
+    start: startDate,
+    end: startDate,
     status: ev.transparency === 'transparent',
-    }
+  };
 }

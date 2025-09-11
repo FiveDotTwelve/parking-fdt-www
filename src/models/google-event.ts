@@ -4,13 +4,13 @@ export interface GoogleEvent {
   id?: string;
   status?: string;
   htmlLink?: string;
-  created?: string; 
+  created?: string;
   updated?: string;
   summary?: string;
   description?: string;
   location?: string;
   creator?: {
-    displayName: string,
+    displayName: string;
     email?: string;
   };
   organizer?: {

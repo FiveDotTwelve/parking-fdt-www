@@ -66,22 +66,6 @@ export async function List() {
                       elements: [
                         {
                           type: 'text',
-                          text: '/show ',
-                        },
-                        {
-                          type: 'text',
-                          text: '- See which parking spots are free or taken.',
-                          style: {
-                            bold: true,
-                          },
-                        },
-                      ],
-                    },
-                    {
-                      type: 'rich_text_section',
-                      elements: [
-                        {
-                          type: 'text',
                           text: '/reserve ',
                         },
                         {

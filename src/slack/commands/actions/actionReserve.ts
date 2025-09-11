@@ -1,11 +1,36 @@
+import { calendar, setCredentialsForUser } from '../../../config/google';
 import { app } from '../../../config/slack';
+import { GoogleEvent } from '../../../models/google-event';
+import { ENV } from '../../../utils/env';
+import convertCalendarEvent from '../../utils/convertEvent';
+
+async function getParkingEvents(parkingSpot: string, userId: string): Promise<GoogleEvent[]> {
+  setCredentialsForUser(userId);
+
+  const res = await calendar.events.list({
+    calendarId: ENV.GOOGLE_CALENDAR_ID,
+    q: parkingSpot,
+    singleEvents: true,
+    orderBy: 'startTime',
+  });
+
+  return res.data.items as GoogleEvent[];
+}
+
+async function checkParkingTaken(
+  parkingSpot: string,
+  date: string,
+  userId: string,
+): Promise<boolean> {
+  const parkings: GoogleEvent[] = await getParkingEvents(parkingSpot, userId);
+  return parkings.some((ev) => convertCalendarEvent(ev).start === date);
+}
 
 export const ActionReserve = () => {
-  app.view('submit_parking_reservation', async ({ body, ack, client }) => {
+  app.view('submit_parking_reservation', async ({ body, ack }) => {
     try {
-      await ack();
-
-      const formValues = body.view.state.values; // Odczytanie wartości z formularza
+      const formValues = body.view.state.values;
+      const userId = body.user.id;
 
       const getValue = (actionId: string) =>
         Object.values(formValues)
@@ -15,51 +40,48 @@ export const ActionReserve = () => {
           ])
           .find(Boolean);
 
+      const selectedSpot = getValue('select_parking_spot') as string;
+      const selectedDate = getValue('parking_date') as string;
 
+      const isTaken = await checkParkingTaken(selectedSpot, selectedDate, userId);
 
-      console.log(`${getValue('select_parking_spot')} and ${getValue('parking_date')}`);
+      if (isTaken) {
+        const dateBlockId = Object.keys(formValues).find(
+          (blockId) => formValues[blockId].parking_date,
+        );
+
+        await ack({
+          response_action: 'errors',
+          errors: {
+            [dateBlockId || 'parking_date_block']:
+              `Parking spot ${selectedSpot} is already booked for ${selectedDate}.`,
+          },
+        });
+
+        return;
+      }
+
+      await ack();
+
+      await calendar.events.insert({
+        calendarId: ENV.GOOGLE_CALENDAR_ID,
+        requestBody: {
+          summary: selectedSpot,
+          start: {
+            date: selectedDate,
+          },
+          end: {
+            date: selectedDate,
+          },
+        },
+      });
+
+      await app.client.chat.postMessage({
+        channel: userId,
+        text: `✅ - You have successfully reserved parking spot ${selectedSpot} for ${selectedDate}. `,
+      });
     } catch (error) {
       console.error(error);
     }
   });
 };
-
-// Wzór ---------------------------------
-
-// export const ActionReserve = () => {
-//   app.view('submit_parking_reservation', async ({ body, ack, client }) => {
-//     try {
-//       await ack();
-
-//       const values = body.view.state.values;
-
-//       const getValue = (actionId: string) =>
-//         Object.values(values)
-//           .map(block => block[actionId]?.selected_option?.value || block[actionId]?.selected_date)
-//           .find(Boolean);
-
-//       const parkingSpot = getValue('select_parking_spot');
-//       const reservationDate = getValue('parking_date');
-
-//       console.log('Wybrany parking:', parkingSpot);
-//       console.log('Data rezerwacji:', reservationDate);
-
-//       // Potwierdzenie dla użytkownika
-//       await client.chat.postMessage({
-//         channel: body.user.id,
-//         text: `Twoja rezerwacja: ${parkingSpot} na ${reservationDate} została zapisana ✅`,
-//       });
-//     } catch (error) {
-//       console.error('Błąd w ActionReserve:', error);
-
-//       try {
-//         await client.chat.postMessage({
-//           channel: body.user.id,
-//           text: 'Wystąpił błąd podczas zapisywania rezerwacji. Spróbuj ponownie.',
-//         });
-//       } catch (postError) {
-//         console.error('Nie udało się wysłać wiadomości o błędzie:', postError);
-//       }
-//     }
-//   });
-// };

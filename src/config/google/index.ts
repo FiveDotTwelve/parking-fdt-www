@@ -2,8 +2,7 @@ import { google } from 'googleapis';
 import { ENV } from '../../utils/env';
 import dotenv from 'dotenv';
 import path from 'path';
-import { getToken } from '../../utils/tokenStorage'
-;
+import { getToken } from '../../utils/tokenStorage';
 dotenv.config();
 
 export const oauth2Client = new google.auth.OAuth2(
@@ -34,6 +33,5 @@ export const setCredentialsForUser = (slackUserId: string) => {
     oauth2Client.setCredentials(token);
   }
 };
-
 
 export const calendar = google.calendar({ version: 'v3', auth: oauth2Client });

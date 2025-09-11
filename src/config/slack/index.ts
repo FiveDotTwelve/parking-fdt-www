@@ -4,8 +4,8 @@ import { ENV } from '../../utils/env';
 const receiver = new ExpressReceiver({
   signingSecret: ENV.SLACK_SIGNING_SECRET,
   endpoints: {
-    commands: '/slack/commands',   
-    actions: '/slack/actions', 
+    commands: '/slack/commands',
+    actions: '/slack/actions',
   },
 });
 
