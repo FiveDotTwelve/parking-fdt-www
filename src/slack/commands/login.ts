@@ -21,11 +21,3 @@ export function Login() {
     }
   });
 }
-      // await respond({
-      //   response_type: 'ephemeral',
-      //   text: `Hi ${command.user_name} ✅\nYour Google Calendar is already connected! You can now book parking spots directly.`,
-      // });
-      //       await respond({
-      //   response_type: 'ephemeral',
-      //   text: `Hi ${command.user_name} 👋\nTo book a parking spot, please authorize your Google account first.\n👉 <${getAuthUrl(command.user_id)}|Click here to sign in with Google>`,
-      // });

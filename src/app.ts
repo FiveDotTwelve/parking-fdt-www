@@ -1,4 +1,4 @@
-import { app,receiver } from './config/slack';
+import { app, receiver } from './config/slack';
 import { CommandManager } from './slack';
 import authRouter from './routes';
 import { ENV } from './utils/env';

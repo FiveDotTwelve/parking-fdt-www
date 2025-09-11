@@ -17,7 +17,6 @@ export const saveToken = (userId: string, tokens: any) => {
   fs.writeFileSync(TOKEN_PATH, JSON.stringify(data, null, 2));
 };
 
-// Pobierz token
 export const getToken = (userId: string) => {
   if (!fs.existsSync(TOKEN_PATH)) return null;
   

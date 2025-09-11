@@ -22,15 +22,11 @@ authRouter.get('/auth/google/callback', async (req, res) => {
       throw err;
     });
 
-    console.log('🔹 Tokens received:', tokens);
-
     oauth2Client.setCredentials(tokens);
 
     if (tokens.refresh_token) {
       await saveToken(slackUserId, tokens.refresh_token);
-    } else {
-      console.warn(`⚠️ No refresh token returned for user ${slackUserId}`);
-    }
+    } else return
 
     await app.client.chat.postMessage({
       channel: slackUserId,

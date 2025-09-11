@@ -13,7 +13,6 @@ const envSchema = z.object({
   SLACK_SIGNING_SECRET: z.string(),
   PORT: z.string(),
   NODE_ENV: z.string(),
-  SLACK_APP_TOKEN: z.string(),
 });
 
 type Env = z.infer<typeof envSchema>;
