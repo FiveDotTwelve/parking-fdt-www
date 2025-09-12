@@ -1,5 +1,5 @@
-import { GoogleEvent } from '../../models/google-event';
-import { Parking } from '../models/slack-event';
+import { GoogleEvent } from '../../models/googleEvent';
+import { Parking } from '../models/slackEvent';
 
 export default function convertCalendarEvent(ev: GoogleEvent): Parking {
   const startDate = ev.start?.date || ev.start?.dateTime?.slice(0, 10);

@@ -17,10 +17,12 @@ authRouter.get('/auth/google/callback', async (req, res) => {
     // console.log('🔹 Received code:', code);
     // console.log('🔹 Received state (Slack user ID):', slackUserId);
 
-    const { tokens } = await oauth2Client.getToken(code).catch((err) => {
-      console.error('❌ - Error getting tokens from Google:', err.response?.data || err);
-      throw err;
-    });
+    // const { tokens } = await oauth2Client.getToken(code).catch((err) => {
+    //   console.error('❌ - Error getting tokens from Google:', err.response?.data || err);
+    //   throw err;
+    // });
+
+    const { tokens } = await oauth2Client.getToken(code);
 
     oauth2Client.setCredentials(tokens);
 

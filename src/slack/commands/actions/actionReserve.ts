@@ -1,6 +1,6 @@
 import { calendar, setCredentialsForUser } from '../../../config/google';
 import { app } from '../../../config/slack';
-import { GoogleEvent } from '../../../models/google-event';
+import { GoogleEvent } from '../../../models/googleEvent';
 import { ENV } from '../../../utils/env';
 import convertCalendarEvent from '../../utils/convertEvent';
 

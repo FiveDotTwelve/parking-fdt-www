@@ -1,12 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autoryzacja</title>
-    <link href="/src/public/output.css" rel="stylesheet">
-</head>
-<body>
-    <p>Autoryzacja Poszła pomyslnie</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authorization</title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body class="flex items-center justify-center bg-[#E82730] text-white min-h-screen p-4">
+    <div class="bg-white rounded-xl shadow-2xl flex flex-col items-center justify-center text-neutral-900 max-w-lg mx-auto p-6 md:p-10 w-full space-y-6">
+      <div class="flex items-center gap-6">
+        <img
+          src="/img/Google.png"
+          class="w-12 md:w-20 h-12 md:h-20 rounded-full"
+          alt="Logo Google"
+        />
+
+        <span class="text-3xl font-bold text-gray-400">+</span>
+
+        <img
+          src="/img/fivedottwelve.jpg"
+          class="w-12 md:w-20 h-12 md:h-20 rounded-full"
+          alt="Logo FiveDotTwelve"
+        />
+      </div>
+
+      <h1 class="text-lg md:text-xl lg:text-2xl font-medium tracking-tight text-center">
+        Successfully authorized with <span class="text-[#4285F4]">Google</span>. You can now return
+        to your <span class="text-green-600">Slack</span> app.
+      </h1>
+
+      <footer class="text-sm text-gray-500 text-center">© 2025 FiveDotTwelve</footer>
+    </div>
+  </body>
 </html>

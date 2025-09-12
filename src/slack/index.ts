@@ -1,9 +1,7 @@
 import { ActionReserve } from './commands/actions/actionReserve';
-import { List } from './commands/list';
-import { Login } from './commands/login';
-import { Reserve } from './commands/reserve';
+import { Parking } from './commands/parking';
 
-const commands = [List, Login, Reserve, ActionReserve];
+const commands = [ActionReserve, Parking];
 
 export function CommandManager() {
   commands.forEach((cmd) => cmd());
