@@ -1,5 +1,5 @@
+import { App } from '@slack/bolt';
 import { calendar, setCredentialsForUser } from '../../../config/google';
-import { app } from '../../../config/slack';
 import { GoogleEvent } from '../../../models/googleEvent';
 import { ENV } from '../../../utils/env';
 import convertCalendarEvent from '../../utils/convertEvent';
@@ -26,7 +26,7 @@ async function checkParkingTaken(
   return parkings.some((ev) => convertCalendarEvent(ev).start === date);
 }
 
-export const ActionReserve = () => {
+export const ActionReserve = (app: App) => {
   app.view('submit_parking_reservation', async ({ body, ack }) => {
     try {
       const formValues = body.view.state.values;

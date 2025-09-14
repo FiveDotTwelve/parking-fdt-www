@@ -1,8 +1,8 @@
 import { ActionReserve } from './commands/actions/actionReserve';
 import { Parking } from './commands/parking';
-
-const commands = [ActionReserve, Parking];
+import { app } from '../config/slack';
 
 export function CommandManager() {
-  commands.forEach((cmd) => cmd());
+  Parking(app);
+  ActionReserve(app);
 }
