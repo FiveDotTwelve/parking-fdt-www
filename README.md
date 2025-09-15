@@ -59,6 +59,8 @@ FDTParking is an integration bot for Slack, created during practice The project 
 ```bash
 git clone https://github.com/Kubaleek/FDTParking.git
 
+cd FDTParking
+
 npm install
 
 cp .env-sample .env
