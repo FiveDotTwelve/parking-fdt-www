@@ -3,24 +3,20 @@ import { calendar } from '../../../../config/google';
 import { PARKING_SLOTS } from '../../../constants/parkingSlots';
 import convertCalendarEvent from '../../../utils/convertEvent';
 import { GoogleEvent } from '../../../../models/googleEvent';
-import { initialDate } from '../../../../utils/getDate';
 import { ENV } from '../../../../utils/env';
 import { CheckAuth } from '../../../utils/checkAuth';
+import { GetWeek } from '../../../utils/getWeek';
 
-export const showToday = async (user_id: string, respond: RespondFn) => {
-
+export const showWeek = async (user_id: string, respond: RespondFn) => {
   CheckAuth(user_id, respond);
 
-  const start = new Date();
-  start.setHours(0, 0, 0, 0);
-  const end = new Date();
-  end.setHours(23, 59, 59, 999);
+  const {start, end} = GetWeek(new Date());
 
   const { data } = await calendar.events.list({
     calendarId: ENV.GOOGLE_CALENDAR_ID,
-    singleEvents: true,
     timeMin: start.toISOString(),
     timeMax: end.toISOString(),
+    singleEvents: true,
     orderBy: 'startTime',
   });
 
@@ -28,11 +24,13 @@ export const showToday = async (user_id: string, respond: RespondFn) => {
     ((data.items as GoogleEvent[]) || []).map(convertCalendarEvent).map((e) => e.summary),
   );
 
+  console.log(((data.items as GoogleEvent[]) || []).map(convertCalendarEvent));
+
   const parkingColumn = '*Parking:*\n' + PARKING_SLOTS.join('\n');
-  const statusColumn =
-    '*Status:*\n' +
-    PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '╚❌╗' : '╚✅╗')).join('\n');
-    
+  // const statusColumn =
+  //   '*Status:*\n' +
+  //   PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '╚❌╗' : '╚✅╗')).join('\n');
+
   await respond({
     response_type: 'in_channel',
     attachments: [
@@ -45,8 +43,8 @@ export const showToday = async (user_id: string, respond: RespondFn) => {
               {
                 type: 'rich_text_section',
                 elements: [
-                  { type: 'text', text: 'List of available and taken parking slot on ' },
-                  { type: 'text', text: initialDate, style: { bold: true } },
+                  { type: 'text', text: `List of available and taken parking slot this ` },
+                  { type: 'text', text: `${start.toLocaleDateString("pl-PL")} - ${end.toLocaleDateString("pl-PL")}`, style: { bold: true } },
                 ],
               },
             ],
@@ -55,7 +53,7 @@ export const showToday = async (user_id: string, respond: RespondFn) => {
             type: 'section',
             fields: [
               { type: 'mrkdwn', text: parkingColumn },
-              { type: 'mrkdwn', text: statusColumn },
+              // { type: 'mrkdwn', text: statusColumn },
             ],
           },
           { type: 'divider' },

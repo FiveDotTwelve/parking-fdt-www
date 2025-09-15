@@ -1,5 +1,6 @@
 import { RespondFn } from '@slack/bolt';
 import { showToday } from './show/showToday';
+import { showWeek } from './show/showWeek';
 
 export const ShowParkingHandler = async (target: string, user_id: string, respond: RespondFn) => {
   if (!target) {
@@ -89,7 +90,7 @@ export const ShowParkingHandler = async (target: string, user_id: string, respon
         await showToday(user_id, respond);
         break;
       case 'week':
-        console.log('week');
+        await showWeek(user_id, respond);
         break;
       case 'week next':
       default:
