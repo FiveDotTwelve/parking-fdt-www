@@ -10,7 +10,7 @@ import { GetWeek } from '../../../utils/getWeek';
 export const showWeek = async (user_id: string, respond: RespondFn) => {
   CheckAuth(user_id, respond);
 
-  const {start, end} = GetWeek(new Date());
+  const { start, end } = GetWeek(new Date());
 
   const { data } = await calendar.events.list({
     calendarId: ENV.GOOGLE_CALENDAR_ID,
@@ -20,16 +20,29 @@ export const showWeek = async (user_id: string, respond: RespondFn) => {
     orderBy: 'startTime',
   });
 
-  const takenSlots = new Set(
-    ((data.items as GoogleEvent[]) || []).map(convertCalendarEvent).map((e) => e.summary),
-  );
+  const dates: string[] = [];
+  const current = new Date(start);
 
-  console.log(((data.items as GoogleEvent[]) || []).map(convertCalendarEvent));
+  while (current <= end) {
+    dates.push(current.toISOString().split('T')[0]);
+    current.setDate(current.getDate() + 1);
+  }
+
+  const statusColumn =
+    '*Status:*\n' +
+    PARKING_SLOTS.map((slot) => {
+      const takenDays = ((data.items as GoogleEvent[]) || [])
+        .map(convertCalendarEvent)
+        .filter((a) => a.summary === slot)
+        .map((a) => a.start);
+
+      const statusLine = dates
+        .map((date) => (takenDays.includes(date) ? '[❌]' : '[✅]'))
+        .join(' ');
+      return `${statusLine}`;
+    }).join('\n');
 
   const parkingColumn = '*Parking:*\n' + PARKING_SLOTS.join('\n');
-  // const statusColumn =
-  //   '*Status:*\n' +
-  //   PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '╚❌╗' : '╚✅╗')).join('\n');
 
   await respond({
     response_type: 'in_channel',
@@ -44,7 +57,11 @@ export const showWeek = async (user_id: string, respond: RespondFn) => {
                 type: 'rich_text_section',
                 elements: [
                   { type: 'text', text: `List of available and taken parking slot this ` },
-                  { type: 'text', text: `${start.toLocaleDateString("pl-PL")} - ${end.toLocaleDateString("pl-PL")}`, style: { bold: true } },
+                  {
+                    type: 'text',
+                    text: `${start.toLocaleDateString('pl-PL')} - ${end.toLocaleDateString('pl-PL')}`,
+                    style: { bold: true },
+                  },
                 ],
               },
             ],
@@ -53,7 +70,7 @@ export const showWeek = async (user_id: string, respond: RespondFn) => {
             type: 'section',
             fields: [
               { type: 'mrkdwn', text: parkingColumn },
-              // { type: 'mrkdwn', text: statusColumn },
+              { type: 'mrkdwn', text: statusColumn },
             ],
           },
           { type: 'divider' },

@@ -31,7 +31,7 @@ export const showToday = async (user_id: string, respond: RespondFn) => {
   const parkingColumn = '*Parking:*\n' + PARKING_SLOTS.join('\n');
   const statusColumn =
     '*Status:*\n' +
-    PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '╚❌╗' : '╚✅╗')).join('\n');
+    PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '[❌]' : '[✅]')).join('\n');
     
   await respond({
     response_type: 'in_channel',
