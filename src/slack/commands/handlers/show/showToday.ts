@@ -8,7 +8,6 @@ import { ENV } from '../../../../utils/env';
 import { CheckAuth } from '../../../utils/checkAuth';
 
 export const showToday = async (user_id: string, respond: RespondFn) => {
-
   CheckAuth(user_id, respond);
 
   const start = new Date();
@@ -32,7 +31,7 @@ export const showToday = async (user_id: string, respond: RespondFn) => {
   const statusColumn =
     '*Status:*\n' +
     PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '[❌]' : '[✅]')).join('\n');
-    
+
   await respond({
     response_type: 'in_channel',
     attachments: [

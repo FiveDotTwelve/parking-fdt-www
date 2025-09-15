@@ -12,7 +12,7 @@ export function Parking(app: App) {
 
     switch (action) {
       case 'login':
-        await LoginParkingHandler(command.user_id, command.user_name, respond)
+        await LoginParkingHandler(command.user_id, command.user_name, respond);
         break;
       case 'list':
         await ListParkingHandler(respond);
