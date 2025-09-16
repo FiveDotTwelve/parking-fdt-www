@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authorization</title>
+  <link href="/output.css" rel="stylesheet" />
+</head>
+
+<body class="antialiased w-full h-full font-medium text-pretty leading-relaxed overflow-hidden text-xl tracking-tight">
+  <div
+    class="from-background via-background/95 to-background/90 relative min-h-screen w-full overflow-hidden bg-gradient-to-br">
+    <div class="absolute inset-0 h-full w-full transition-opacity duration-1000 opacity-100">
+      <img src="/img/tło.webp" alt="Background"
+        class="object-cover object-center shrink aspect-video bg-no-repeat w-full h-full" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#E82730] via-[#E82730]/60 backdrop-blur to-transparent"></div>
+    </div>
+    <div class="relative z-30 max-w-5xl mx-auto flex min-h-screen w-full items-center justify-center px-4 py-16">
+      <div
+        class="bg-white max-w-xl relative z-30 w-full h-full rounded-xl flex flex-col gap-6 items-center justify-center text-center border p-8 border-neutral-400/30">
+        <div class="flex items-center justify-center gap-6">
+          <img src="/img/Google.png" class="w-16 h-16 shrink aspect-square object-center rounded-full"
+            alt="Logo Google" />
+
+          <span class="text-3xl font-bold text-gray-400">+</span>
+
+          <img src="/img/fivedottwelve.jpg" class="w-16 h-16 aspect-square shrink object-center rounded-full"
+            alt="Logo FiveDotTwelve" />
+        </div>
+        <h1 className="font-medium tracking-tight ">
+          Successfully authorized with Google. You can now
+          return to your Slack app.
+        </h1>
+        <footer class="text-sm text-gray-500 text-center">
+          © 2025 FiveDotTwelve · ul. Gdanska 130 90-520 Lodz, Poland
+        </footer>
+      </div>
+      <div class="pointer-events-none absolute inset-0 z-20">
+        <div
+          class="float float-1 border-[#E82730] text-white bg-[#E82730]/30 text-primary absolute top-[25%] left-[8%] flex h-16 w-16 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-palette h-6 w-6" aria-hidden="true">
+            <path
+              d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z">
+            </path>
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <div
+          class="float float-3 border-[#E82730] text-white bg-[#E82730]/30 absolute bottom-[30%] left-[12%] flex h-16 w-16 items-center justify-center rounded-full border shadow-sm backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-code text-muted-foreground h-6 w-6" aria-hidden="true">
+            <path d="m16 18 6-6-6-6"></path>
+            <path d="m8 6-6 6 6 6"></path>
+          </svg>
+        </div>
+        <div
+          class="float float-6 border-[#E82730] text-[#E82730] bg-white/70 absolute top-[60%] left-[5%] flex h-24 w-24 items-center justify-center rounded-2xl border shadow-sm backdrop-blur-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-layers text-primary/80 h-8 w-8" aria-hidden="true">
+            <path
+              d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z">
+            </path>
+            <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path>
+            <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path>
+          </svg>
+        </div>
+        <div
+          class="float float-2 border-[#E82730]/20 bg-[#E82730]/80 absolute top-[20%] right-[10%] flex h-20 w-20 items-center justify-center rounded-2xl border shadow-md backdrop-blur-sm">
+          <div class="grid grid-cols-2 gap-1">
+            <div class="bg-white/30 h-4 w-4 rounded-sm"></div>
+            <div class="bg-white/20 h-4 w-4 rounded-sm"></div>
+            <div class="bg-white/10 h-4 w-4 rounded-sm"></div>
+            <div class="bg-white/40 h-4 w-4 rounded-sm"></div>
+          </div>
+        </div>
+        <div
+          class="float float-5 border-[#E82730]/30 bg-white/80 absolute top-[65%] right-[15%] flex h-16 w-36 flex-col justify-center rounded-lg border p-3 shadow-sm backdrop-blur-sm">
+          <div class="bg-[#E82730]/40 h-2 w-3/4 rounded-full"></div>
+          <div class="bg-[#E82730]/30 mt-2 h-2 w-1/2 rounded-full"></div>
+        </div>
+        <div
+          class="float float-8 border-[#E82730]/20 bg-white/40 absolute right-[25%] bottom-[15%] flex h-14 w-14 items-center justify-center rounded-full border shadow-sm backdrop-blur-sm">
+          <div class="bg-[#E82730]/30 h-6 w-6 rounded-sm"></div>
+        </div>
+        <div
+          class="float float-9 border-[#E82730]/20 bg-[#E82730]/60 absolute top-[40%] right-[2%] flex h-16 w-16 items-center justify-center rounded-lg border shadow-sm backdrop-blur-sm">
+          <div class="bg-white/20 h-8 w-8 rounded-md"></div>
+        </div>
+        <div
+          class="float float-10 border-[#E82730]/30 bg-white/5 absolute top-[5%] left-[40%] flex h-12 w-12 items-center justify-center rounded-full border shadow-sm backdrop-blur-sm">
+          <div class="bg-[#E82730]/50 h-4 w-4 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

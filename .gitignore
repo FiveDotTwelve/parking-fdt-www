@@ -18,5 +18,4 @@ yarn-error.log*
 /src/config/google/tokens.json
 .vercel
 
-# build output
-build/
+# dist output

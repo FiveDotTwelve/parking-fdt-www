@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && copyfiles -u 1 src/views/**/* build/views && copyfiles -u 2 src/public/img/**/* build/public/img && copyfiles -u 2 src/public/*.css build/public",
+    "build": "tsc && copyfiles -u 1 src/views/**/* dist/views && copyfiles -u 2 src/public/img/**/* dist/public/img && copyfiles -u 2 src/public/*.css dist/public",
     "reset": "rmdir /s /q node_modules && del package-lock.json && npm cache clean --force && npm install",
     "start": "node build/app.js",
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node src/app.ts\"",
