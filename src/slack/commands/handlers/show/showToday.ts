@@ -1,11 +1,11 @@
 import { RespondFn } from '@slack/bolt';
 import { calendar } from '../../../../config/google';
 import { PARKING_SLOTS } from '../../../constants/parkingSlots';
-import convertCalendarEvent from '../../../utils/convertEvent';
+import convertCalendarEvent from '../../../lib/convertEvent';
 import { GoogleEvent } from '../../../../models/googleEvent';
 import { initialDate } from '../../../../utils/getDate';
 import { ENV } from '../../../../utils/env';
-import { CheckAuth } from '../../../utils/checkAuth';
+import { CheckAuth } from '../../../lib/checkAuth';
 
 export const showToday = async (user_id: string, respond: RespondFn) => {
   CheckAuth(user_id, respond);

@@ -5,13 +5,16 @@ import convertCalendarEvent from '../../../lib/convertEvent';
 import { GoogleEvent } from '../../../../models/googleEvent';
 import { ENV } from '../../../../utils/env';
 import { CheckAuth } from '../../../lib/checkAuth';
-import { GetWeek } from '../../../lib/getWeek';
 import { generateDates } from '../../../lib/generateDates';
+import { GetWeek } from '../../../lib/getWeek';
 
-export const showWeek = async (user_id: string, respond: RespondFn) => {
+export const showNext = async (user_id: string, respond: RespondFn) => {
   CheckAuth(user_id, respond);
 
-  const { start, end } = GetWeek(new Date());
+  const nextWeekDate = new Date();
+  nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+
+  const { start, end } = GetWeek(nextWeekDate);
 
   const { data } = await calendar.events.list({
     calendarId: ENV.GOOGLE_CALENDAR_ID,
@@ -21,7 +24,6 @@ export const showWeek = async (user_id: string, respond: RespondFn) => {
     orderBy: 'startTime',
   });
 
-  const today = new Date().toISOString().split('T')[0];
   const dates = generateDates(start, end);
 
   const takenDays = (slot: string): string[] => {
@@ -35,7 +37,6 @@ export const showWeek = async (user_id: string, respond: RespondFn) => {
   const statusLines = (parkings_days: string[]): string => {
     return dates
       .map((date) => {
-        if (date < today) return '[❌]';
         return parkings_days.includes(date) ? '[❌]' : '[✅]';
       })
       .join(' ');

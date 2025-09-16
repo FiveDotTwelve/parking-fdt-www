@@ -79,7 +79,7 @@ export const ListParkingHandler = async (respond: RespondFn) => {
                     elements: [
                       {
                         type: 'text',
-                        text: '/parking show [ today | week | next week ] ',
+                        text: '/parking show [ today | week | next ] ',
                       },
                       {
                         type: 'text',

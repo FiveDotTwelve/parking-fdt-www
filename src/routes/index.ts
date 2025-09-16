@@ -39,7 +39,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
     res.render('auth-success.ejs', { url: req.protocol + '://' + req.headers.host });
   } catch (error) {
     console.error('Google OAuth callback error full:', error);
-    res.status(500).json({ message: 'Error during Google authorization.', error: error });
+    res.render('auth-failed.ejs', { url: req.protocol + '://' + req.headers.host });
   }
 });
 

@@ -1,6 +1,7 @@
 import { RespondFn } from '@slack/bolt';
 import { showToday } from './show/showToday';
 import { showWeek } from './show/showWeek';
+import { showNext } from './show/showNext';
 
 export const ShowParkingHandler = async (target: string, user_id: string, respond: RespondFn) => {
   if (!target) {
@@ -63,7 +64,7 @@ export const ShowParkingHandler = async (target: string, user_id: string, respon
                       elements: [
                         {
                           type: 'text',
-                          text: 'next week',
+                          text: 'next',
                           style: {
                             bold: true,
                           },
@@ -82,7 +83,6 @@ export const ShowParkingHandler = async (target: string, user_id: string, respon
         },
       ],
     });
-
     return;
   } else {
     switch (target) {
@@ -92,11 +92,13 @@ export const ShowParkingHandler = async (target: string, user_id: string, respon
       case 'week':
         await showWeek(user_id, respond);
         break;
-      case 'week next':
+      case 'next':
+        await showNext(user_id, respond);
+        break;
       default:
         await respond({
           response_type: 'ephemeral',
-          text: 'Unknown parameter. Use `today`, `week` or `next week`.',
+          text: 'Unknown parameter. Use `today`, `week` or `next`.',
         });
         break;
     }
