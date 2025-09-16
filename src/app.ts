@@ -17,7 +17,8 @@ receiver.app.set('views', path.join(__dirname, 'views'));
 receiver.app.set('view engine', 'ejs');
 
 receiver.app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.json({ ok: true, message: 'API działa!' });
+
 });
 
 if (ENV.NODE_ENV !== 'production') {
