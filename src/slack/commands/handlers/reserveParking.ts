@@ -2,7 +2,8 @@ import { RespondFn } from '@slack/bolt';
 import { initialDate } from '../../../utils/getDate';
 import { buildReservationModal } from '../../modals/reservationModal';
 import { WebClient } from '@slack/web-api';
-import { CheckAuth } from '../../utils/checkAuth';
+import { getToken } from '../../../utils/tokenStorage';
+import { setCredentialsForUser } from '../../../config/google';
 
 export const ReserveParkingHandler = async (
   user_id: string,
@@ -10,14 +11,22 @@ export const ReserveParkingHandler = async (
   trigger_id: string,
   respond: RespondFn,
 ) => {
-  CheckAuth(user_id, respond);
-
-  try {
-    await client.views.open({
-      trigger_id: trigger_id,
-      view: buildReservationModal(initialDate),
+  if (!getToken(user_id)) {
+    await respond({
+      response_type: 'ephemeral',
+      text: 'You must be logged in via Google Auth. Use the `/parking login` command.',
     });
-  } catch (error) {
-    console.error(error);
+    return;
+  } else {
+    setCredentialsForUser(user_id);
+
+    try {
+      await client.views.open({
+        trigger_id: trigger_id,
+        view: buildReservationModal(initialDate),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 };

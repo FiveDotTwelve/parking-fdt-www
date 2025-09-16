@@ -2,7 +2,7 @@ import { App } from '@slack/bolt';
 import { calendar, setCredentialsForUser } from '../../../config/google';
 import { GoogleEvent } from '../../../models/googleEvent';
 import { ENV } from '../../../utils/env';
-import convertCalendarEvent from '../../utils/convertEvent';
+import convertCalendarEvent from '../../lib/convertEvent';
 
 async function getParkingEvents(parkingSpot: string, userId: string): Promise<GoogleEvent[]> {
   setCredentialsForUser(userId);
@@ -31,6 +31,7 @@ export const ActionReserve = (app: App) => {
     try {
       const formValues = body.view.state.values;
       const userId = body.user.id;
+      const today = new Date().toISOString().split('T')[0];
 
       const getValue = (actionId: string) =>
         Object.values(formValues)
@@ -45,16 +46,25 @@ export const ActionReserve = (app: App) => {
 
       const isTaken = await checkParkingTaken(selectedSpot, selectedDate, userId);
 
-      if (isTaken) {
-        const dateBlockId = Object.keys(formValues).find(
-          (blockId) => formValues[blockId].parking_date,
-        );
+      const dateBlockId = Object.keys(formValues).find(
+        (blockId) => formValues[blockId].parking_date,
+      );
 
+      if (isTaken) {
         await ack({
           response_action: 'errors',
           errors: {
             [dateBlockId || 'parking_date_block']:
               `Parking spot ${selectedSpot} is already booked for ${selectedDate}.`,
+          },
+        });
+
+        return;
+      } else if (selectedDate < today) {
+        await ack({
+          response_action: 'errors',
+          errors: {
+            [dateBlockId || 'parking_date_block']: `You can't reserve a parking spot in the past.`,
           },
         });
 
@@ -78,7 +88,7 @@ export const ActionReserve = (app: App) => {
 
       await app.client.chat.postMessage({
         channel: userId,
-        text: `✅ - You have successfully reserved parking spot ${selectedSpot} for ${selectedDate}. `,
+        text: `✅ - You have successfully reserved parking spot *${selectedSpot}* for *${selectedDate}*. `,
       });
     } catch (error) {
       console.error(error);
