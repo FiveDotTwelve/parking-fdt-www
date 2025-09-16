@@ -1,4 +1,4 @@
-import { receiver } from './config/slack';
+import { app, receiver } from './config/slack';
 import { CommandManager } from './slack';
 import authRouter from './routes';
 import { ENV } from './utils/env';
@@ -16,17 +16,16 @@ receiver.app.use(express.static(path.join(__dirname, 'public')));
 receiver.app.set('views', path.join(__dirname, 'views'));
 receiver.app.set('view engine', 'ejs');
 
-receiver.app.get('/', async (req, res) => {
-  res.render('auth-success.ejs', { url: req.protocol + '://' + req.headers.host });
+receiver.app.get('/', (req, res) => {
+  res.send('Hello World');
 });
 
-// (async () => {
-//   await app.start(ENV.PORT);
-//   console.log('⚡ FDTParkingBot bot running with ExpressReceiver!');
-// })();
-
-receiver.app.listen(ENV.PORT, () => {
-  console.log(`Server running at http://localhost:${ENV.PORT}`);
-})
+if (ENV.NODE_ENV !== 'production') {
+  (async () => {
+    await app.start(ENV.PORT);
+    console.log('⚡ FDTParkingBot running locally!');
+    console.log(`Server running at http://localhost:${ENV.PORT}`);
+  })();
+}
 
 export const handler = serverless(receiver.app);
