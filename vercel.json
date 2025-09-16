@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "functions": {
+    "src/app.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "/src/app.ts" }
+  ]
+}
