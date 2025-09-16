@@ -8,7 +8,6 @@
   ],
   "routes": [
     {
-    {
       "src": "/(.*)",
       "dest": "build/app.js",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
