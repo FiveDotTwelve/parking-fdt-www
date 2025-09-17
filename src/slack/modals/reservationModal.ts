@@ -4,7 +4,7 @@ import { PARKING_OPTIONS } from '../constants/parkingOptions';
 export const buildReservationModal = (initialDate: string): ModalView => ({
   callback_id: 'submit_parking_reservation',
   type: 'modal',
-  title: { type: 'plain_text', text: 'FDTParkingBot', emoji: true },
+  title: { type: 'plain_text', text: 'FDTParking', emoji: true },
   submit: { type: 'plain_text', text: 'Submit', emoji: true },
   close: { type: 'plain_text', text: 'Cancel', emoji: true },
   blocks: [
@@ -18,6 +18,7 @@ export const buildReservationModal = (initialDate: string): ModalView => ({
         action_id: 'select_parking_spot',
       },
       label: { type: 'plain_text', text: 'Parking', emoji: true },
+      optional: false,
     },
     {
       type: 'input',
@@ -29,6 +30,7 @@ export const buildReservationModal = (initialDate: string): ModalView => ({
         action_id: 'parking_date',
       },
       label: { type: 'plain_text', text: 'Reservation Date', emoji: true },
+      optional: false,
     },
   ],
 });

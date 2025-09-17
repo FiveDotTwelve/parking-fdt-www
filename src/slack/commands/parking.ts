@@ -1,10 +1,11 @@
 import { App } from '@slack/bolt';
-import { LoginParkingHandler } from './handlers/loginParking';
-import { ListParkingHandler } from './handlers/listParking';
-import { ReserveParkingHandler } from './handlers/reserveParking';
-import { ShowParkingHandler } from './handlers/showParking';
+import { LoginParking } from './handlers/loginParking';
+import { ListParking } from './handlers/listParking';
+import { ReserveParking } from './handlers/reserveParking';
+import { CancelParking } from './handlers/cancelParking';
+import { ShowParking } from './handlers/showParking';
 
-export function Parking(app: App) {
+export function ParkingCommand(app: App) {
   app.command('/parking', async ({ command, ack, respond, client }) => {
     await ack();
 
@@ -12,16 +13,19 @@ export function Parking(app: App) {
 
     switch (action) {
       case 'login':
-        await LoginParkingHandler(command.user_id, command.user_name, respond);
+        await LoginParking(command.user_id, command.user_name, respond);
         break;
       case 'list':
-        await ListParkingHandler(respond);
+        await ListParking(respond);
         break;
       case 'reserve':
-        await ReserveParkingHandler(command.user_id, client, command.trigger_id, respond);
+        await ReserveParking(command.user_id, client, command.trigger_id, respond);
+        break;
+      case 'cancel':
+        await CancelParking(command.user_id, client, command.trigger_id, respond);
         break;
       case 'show':
-        await ShowParkingHandler(target, command.user_id, respond);
+        await ShowParking(target, command.user_id, respond);
         break;
       default:
         await respond({

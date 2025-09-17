@@ -6,22 +6,22 @@ import { app } from '../config/slack';
 const authRouter = Router();
 
 authRouter.get('/auth/google/callback', async (req, res) => {
+  const code = req.query.code as string;
+  const slackUserId = req.query.state as string;
+
+  if (!code || !slackUserId) {
+    return res.status(400).json({ message: 'Missing code or state.' });
+  }
+
+  // console.log('🔹 Received code:', code);
+  // console.log('🔹 Received state (Slack user ID):', slackUserId);
+
+  // const { tokens } = await oauth2Client.getToken(code).catch((err) => {
+  //   console.error('❌ - Error getting tokens from Google:', err.response?.data || err);
+  //   throw err;
+  // });
+
   try {
-    const code = req.query.code as string;
-    const slackUserId = req.query.state as string;
-
-    if (!code || !slackUserId) {
-      return res.status(400).json({ message: 'Missing code or state.' });
-    }
-
-    // console.log('🔹 Received code:', code);
-    // console.log('🔹 Received state (Slack user ID):', slackUserId);
-
-    // const { tokens } = await oauth2Client.getToken(code).catch((err) => {
-    //   console.error('❌ - Error getting tokens from Google:', err.response?.data || err);
-    //   throw err;
-    // });
-
     const { tokens } = await oauth2Client.getToken(code);
 
     oauth2Client.setCredentials(tokens);
@@ -39,6 +39,11 @@ authRouter.get('/auth/google/callback', async (req, res) => {
     res.render('auth-success.ejs', { url: req.protocol + '://' + req.headers.host });
   } catch {
     // console.error('Google OAuth callback error full:', error);
+    await app.client.chat.postMessage({
+      channel: slackUserId,
+      text: '❌ - Google authorization failed. You cannot book your parking spot from Slack.',
+    });
+
     res.render('auth-failed.ejs', { url: req.protocol + '://' + req.headers.host });
   }
 });

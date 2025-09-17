@@ -2,11 +2,7 @@ import { RespondFn } from '@slack/bolt';
 import { getToken } from '../../../utils/tokenStorage';
 import { getAuthUrl } from '../../../config/google';
 
-export const LoginParkingHandler = async (
-  user_id: string,
-  user_name: string,
-  respond: RespondFn,
-) => {
+export const LoginParking = async (user_id: string, user_name: string, respond: RespondFn) => {
   const refreshToken = getToken(user_id);
 
   if (!refreshToken) {

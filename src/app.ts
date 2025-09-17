@@ -9,9 +9,9 @@ receiver.app.use('/api', authRouter);
 
 CommandManager();
 
-receiver.app.use(express.static(path.join(__dirname, '..', 'public')));
+receiver.app.use(express.static(path.join(__dirname, 'public')));
 
-receiver.app.set('views', path.join(__dirname, '..', 'src', 'views'));
+receiver.app.set('views', path.join(__dirname, 'views'));
 receiver.app.set('view engine', 'ejs');
 
 (async () => {

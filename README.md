@@ -50,6 +50,7 @@ FDTParking is an integration bot for Slack, created during practice The project 
 - `/parking list` – Show all commands  
 - `/parking login` – Connect your Slack account to Google to book parking  
 - `/parking reserve` – Reserve a parking spot and add it to Google Calendar  
+- `/parking cancel` – Cancel a parking spot and delete it from your Google Calendar.
 - `/parking show [today | week | next ]` – Shows available and taken parking spots 
 
 ---

@@ -1,6 +1,6 @@
 import { RespondFn } from '@slack/bolt';
 
-export const ListParkingHandler = async (respond: RespondFn) => {
+export const ListParking = async (respond: RespondFn) => {
   await respond({
     response_type: 'ephemeral',
     attachments: [
@@ -68,6 +68,22 @@ export const ListParkingHandler = async (respond: RespondFn) => {
                       {
                         type: 'text',
                         text: '- Reserve a parking spot and add it to your Google Calendar.',
+                        style: {
+                          bold: true,
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    type: 'rich_text_section',
+                    elements: [
+                      {
+                        type: 'text',
+                        text: '/parking cancel ',
+                      },
+                      {
+                        type: 'text',
+                        text: '- Cancel a parking spot and delete it from your Google Calendar.',
                         style: {
                           bold: true,
                         },

@@ -1,11 +1,11 @@
 import { RespondFn } from '@slack/bolt';
-import { initialDate } from '../../../utils/getDate';
-import { buildReservationModal } from '../../modals/reservationModal';
-import { WebClient } from '@slack/web-api';
-import { getToken } from '../../../utils/tokenStorage';
 import { setCredentialsForUser } from '../../../config/google';
+import { getToken } from '../../../utils/tokenStorage';
+import { buildReservationModal } from '../../modals/reservationModal';
+import { initialDate } from '../../../utils/getDate';
+import { WebClient } from '@slack/web-api';
 
-export const ReserveParkingHandler = async (
+export const ReserveParking = async (
   user_id: string,
   client: WebClient,
   trigger_id: string,
