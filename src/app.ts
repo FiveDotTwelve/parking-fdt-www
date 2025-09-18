@@ -12,6 +12,12 @@ CommandManager();
 
 receiver.app.use(express.static(path.join(__dirname, 'public')));
 
+receiver.app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
+});
+
+
+
 (async () => {
   await app.start(ENV.PORT);
   console.log('⚡ FDTParkingBot running locally!');

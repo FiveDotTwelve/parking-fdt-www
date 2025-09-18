@@ -25,7 +25,7 @@ export function ParkingCommand(app: App) {
         await CancelParking(command.user_id, client, command.trigger_id, respond);
         break;
       case 'show':
-        await ShowParking(target, command.user_id, respond);
+        await ShowParking(target, command, command.user_id, respond);
         break;
       default:
         await respond({

@@ -71,30 +71,6 @@ cp .env-sample .env
 
 npm run dev
 ```
----
-
-## Testing Locally 🎓
-
-You can use `ngrok` to tunnel your local server:
-
-```bash
-ngrok http 5000
-
-# set up environment variables - follow instructions from .env-sample
-
-# Google Calendar
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_SECRET_ID=your-google-client-secret
-GOOGLE_REDIRECT_URI=https://<ngrok-id>.ngrok-free.app/
-GOOGLE_CALENDAR_ID=google-your-calendar-id
-
-# Slack
-SLACK_BOT_TOKEN=your-slack-bot-token
-SLACK_SIGNING_SECRET=your-slack-signing-secret
-
-# Redis
-REDIS_URL="your_redis_url_db"
-```
 
 ---
 

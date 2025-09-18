@@ -3,7 +3,7 @@ import { GoogleEvent } from '../../../models/googleEvent';
 import { ENV } from '../../../utils/env';
 import { getToken } from '../../../utils/tokenStorage';
 import convertCalendarEvent from '../../lib/convertEvent';
-import { GetWeek } from '../../lib/dateUtils';
+import { GetWeek } from '../../../utils/dateUtils';
 import { buildCancelModal } from '../../modals/cancelModal';
 import { WebClient } from '@slack/web-api';
 import { RespondFn } from '@slack/bolt';
