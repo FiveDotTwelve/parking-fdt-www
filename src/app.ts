@@ -10,7 +10,6 @@ receiver.app.use('/api', authRouter);
 CommandManager();
 
 receiver.app.use(express.static(path.join(__dirname, 'public')));
-receiver.app.use(express.static(path.join(__dirname, 'views')));
 
 (async () => {
   await app.start(ENV.PORT);
