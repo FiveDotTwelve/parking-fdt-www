@@ -45,7 +45,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
       text: '❌ - Google authorization failed. You cannot book your parking spot from Slack.',
     });
 
-    res.sendFile(path.join(__dirname, ".."  "views", "auth-failed.html"));
+    res.sendFile(path.join(__dirname, "..",  "views", "auth-failed.html"));
   }
 });
 
