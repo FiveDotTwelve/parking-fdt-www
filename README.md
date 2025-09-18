@@ -89,6 +89,9 @@ GOOGLE_CALENDAR_ID=google-your-calendar-id
 # Slack
 SLACK_BOT_TOKEN=your-slack-bot-token
 SLACK_SIGNING_SECRET=your-slack-signing-secret
+
+# Redis
+REDIS_URL="your_redis_url_db"
 ```
 
 ---

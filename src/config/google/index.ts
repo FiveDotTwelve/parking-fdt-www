@@ -23,8 +23,8 @@ export const getAuthUrl = (slackUserId: string) =>
     state: slackUserId,
   });
 
-export const setCredentialsForUser = (slackUserId: string) => {
-  const token = getToken(slackUserId);
+export const setCredentialsForUser = async (slackUserId: string) => {
+  const token = await getToken(slackUserId);
   if (!token) return;
 
   if (typeof token === 'string') {

@@ -11,14 +11,14 @@ export const ReserveParking = async (
   trigger_id: string,
   respond: RespondFn,
 ) => {
-  if (!getToken(user_id)) {
+  if (await !getToken(user_id)) {
     await respond({
       response_type: 'ephemeral',
       text: 'You must be logged in via Google Auth. Use the `/parking login` command.',
     });
     return;
   } else {
-    setCredentialsForUser(user_id);
+    await setCredentialsForUser(user_id);
 
     try {
       await client.views.open({

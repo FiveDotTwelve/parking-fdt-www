@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import fs from 'fs';
-import path from 'path';
+import redis from '../config/redis';
 
-const TOKEN_PATH = path.join(__dirname, '../config/google/tokens.json');
-
-export const saveToken = (userId: string, tokens: any) => {
-  let data: { [key: string]: any } = {};
-
-  if (fs.existsSync(TOKEN_PATH)) {
-    data = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'));
+export const saveToken = async (userId: string, tokens: any) => {
+  try {
+    await redis.set(`fdtparking:google_token:${userId}`, JSON.stringify(tokens));
+    console.log(`✅ Token saved for user: ${userId}`);
+  } catch (err) {
+    console.error('❌ Error saving token to Redis:', err);
+    console.log('❌ Error saving token to Redis:', err)
   }
-
-  data[userId] = tokens;
-
-  fs.writeFileSync(TOKEN_PATH, JSON.stringify(data, null, 2));
 };
 
-export const getToken = (userId: string) => {
-  if (!fs.existsSync(TOKEN_PATH)) return null;
-
-  const data: { [key: string]: any } = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'));
-  return data[userId] || null;
+export const getToken = async (userId: string) => {
+  try {
+    const data = await redis.get(`fdtparking:google_token:${userId}`);
+    if (!data) return null;
+    return JSON.parse(data);
+  } catch (err) {
+    console.error('❌ Error getting token from Redis:', err);
+    return null;
+  }
 };
+
