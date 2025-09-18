@@ -12,6 +12,8 @@
 [![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)](#)
 [![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)](#)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](#)
+[![Redis](https://img.shields.io/badge/Redis-%23DD0031.svg?logo=redis&logoColor=white)](#)
+[![Google](https://img.shields.io/badge/Google-4285F4?logo=google&logoColor=white)](#)
 
 <p>
 ⭐ Star this repository on GitHub — your support motivates me to keep learning and building! 🚀✨
