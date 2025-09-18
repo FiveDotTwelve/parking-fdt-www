@@ -14,7 +14,7 @@ export const CancelParking = async (
   trigger_id: string,
   respond: RespondFn,
 ) => {
-  if (await !getToken(user_id)) {
+  if (!(await getToken(user_id))) {
     await respond({
       response_type: 'ephemeral',
       text: 'You must be logged in via Google Auth. Use the `/parking login` command.',

@@ -93,7 +93,7 @@ export const ShowParking = async (target: string, user_id: string, respond: Resp
   } else {
     switch (target) {
       case 'today':
-        if (await !getToken(user_id)) {
+        if (!(await getToken(user_id))) {
           await respond({
             response_type: 'ephemeral',
             text: 'You must be logged in via Google Auth. Use the `/parking login` command.',
@@ -160,7 +160,7 @@ export const ShowParking = async (target: string, user_id: string, respond: Resp
         }
         break;
       case 'week':
-        if (await !getToken(user_id)) {
+        if (!(await getToken(user_id))) {
           await respond({
             response_type: 'ephemeral',
             text: 'You must be logged in via Google Auth. Use the `/parking login` command.',
@@ -263,7 +263,7 @@ export const ShowParking = async (target: string, user_id: string, respond: Resp
         }
         break;
       case 'next':
-        if (await !getToken(user_id)) {
+        if (!(await getToken(user_id))) {
           await respond({
             response_type: 'ephemeral',
             text: 'You must be logged in via Google Auth. Use the `/parking login` command.',

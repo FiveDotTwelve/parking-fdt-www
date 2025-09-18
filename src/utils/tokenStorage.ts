@@ -7,7 +7,7 @@ export const saveToken = async (userId: string, tokens: any) => {
     console.log(`✅ Token saved for user: ${userId}`);
   } catch (err) {
     console.error('❌ Error saving token to Redis:', err);
-    console.log('❌ Error saving token to Redis:', err)
+    console.log('❌ Error saving token to Redis:', err);
   }
 };
 
@@ -21,4 +21,3 @@ export const getToken = async (userId: string) => {
     return null;
   }
 };
-
