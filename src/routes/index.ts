@@ -37,7 +37,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
     });
 
     // res.status(200).json({ message: 'Authorization successful' });
-    res.sendFile(path.join(__dirname, "..", "views", "auth-success.html"));
+    res.sendFile(path.join(__dirname, "views", "auth-success.html"));
   } catch {
     // console.error('Google OAuth callback error full:', error);
     await app.client.chat.postMessage({
@@ -45,7 +45,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
       text: '❌ - Google authorization failed. You cannot book your parking spot from Slack.',
     });
 
-    res.sendFile(path.join(__dirname, "..", "views", "auth-failed.html"));
+    res.sendFile(path.join(__dirname,  "views", "auth-failed.html"));
   }
 });
 
