@@ -45,7 +45,6 @@ FDTParking is an integration bot for Slack, created during practice. The project
 - CSS
 - TailwindCSS
 - Zod
-- Embedded JavaScript
 - Prettier
 
 ---
