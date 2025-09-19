@@ -19,17 +19,17 @@
 ⭐ Star this repository on GitHub — your support motivates me to keep learning and building! 🚀✨
 </p>
 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/kuba.leek/)
-[![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://www.linkedin.com/in/kuba-kr%C3%B3l-15a226379/)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/fivedottwelve/)
+[![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://pl.linkedin.com/company/fivedottwelve)
 [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/Kubaleek)
-[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://www.facebook.com/kuba.krol.79219)
+[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://www.facebook.com/fivedottwelve)
 
 ---
 
 # FDTParking 🚀
 
 <p>
-FDTParking is an integration bot for Slack, created during practice The project was built with Node.js, Express, and TypeScript, and integrated with the Google Calendar API. The bot runs as a backend server that receives events from Slack, processes user messages according to the application logic, and communicates with Google Calendar to handle reservations and manage parking spots. This makes the process of booking parking spaces fast, simple, and accessible directly from Slack.
+FDTParking is an integration bot for Slack, created during practice. The project was built with Node.js, Express, and TypeScript, and integrated with the Google Calendar API, using a Redis database. The bot runs as a backend server that receives events from Slack, processes user messages according to the application logic, and communicates with Google Calendar to handle reservations and manage parking spots. This makes the process of booking parking spaces fast, simple, and accessible directly from Slack.
 </p>
 
 ---
@@ -41,6 +41,7 @@ FDTParking is an integration bot for Slack, created during practice The project 
 - TypeScript  
 - Slack API  
 - Google Calendar API
+- Redis
 - CSS
 - TailwindCSS
 - Zod
@@ -52,7 +53,7 @@ FDTParking is an integration bot for Slack, created during practice The project 
 ## List of Available Commands 🔥
 
 
-- `/parking list` – Show all commands  
+- `/parking help` – Show all commands  
 - `/parking login` – Connect your Slack account to Google to book parking  
 - `/parking reserve` – Reserve a parking spot and add it to Google Calendar  
 - `/parking cancel` – Cancel a parking spot and delete it from your Google Calendar.

@@ -1,6 +1,6 @@
 import { RespondFn } from '@slack/bolt';
 
-export const ListParking = async (respond: RespondFn) => {
+export const HelpParking = async (respond: RespondFn) => {
   await respond({
     response_type: 'ephemeral',
     attachments: [
@@ -31,7 +31,7 @@ export const ListParking = async (respond: RespondFn) => {
                     elements: [
                       {
                         type: 'text',
-                        text: '/parking list ',
+                        text: '/parking help ',
                       },
                       {
                         type: 'text',

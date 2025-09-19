@@ -1,6 +1,6 @@
 import { App } from '@slack/bolt';
 import { LoginParking } from './handlers/loginParking';
-import { ListParking } from './handlers/listParking';
+import { HelpParking } from './handlers/helpParking';
 import { ReserveParking } from './handlers/reserveParking';
 import { CancelParking } from './handlers/cancelParking';
 import { ShowParking } from './handlers/showParking';
@@ -15,8 +15,8 @@ export function ParkingCommand(app: App) {
       case 'login':
         await LoginParking(command.user_id, command.user_name, respond);
         break;
-      case 'list':
-        await ListParking(respond);
+      case 'help':
+        await HelpParking(respond);
         break;
       case 'reserve':
         await ReserveParking(command.user_id, client, command.trigger_id, respond);
@@ -30,7 +30,7 @@ export function ParkingCommand(app: App) {
       default:
         await respond({
           response_type: 'ephemeral',
-          text: 'Unknown command. Try `/parking list`.',
+          text: 'Unknown command. Try `/parking help`.',
         });
         break;
     }

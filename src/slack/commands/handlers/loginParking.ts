@@ -8,12 +8,12 @@ export const LoginParking = async (user_id: string, user_name: string, respond: 
   if (!refreshToken) {
     await respond({
       response_type: 'ephemeral',
-      text: `Hi ${user_name} 👋\nTo book a parking spot, please authorize your Google account first.\n👉 <${getAuthUrl(user_id)}|Click here to sign in with Google>`,
+      text: `Hi ${user_name} 👋\nBooking, checking, and canceling a parking spot requires Google account authorization. Please sign in with your Google account first.\n👉 <${getAuthUrl(user_id)}|Click here to sign in with Google>`,
     });
   } else {
     await respond({
       response_type: 'ephemeral',
-      text: `Hi ${user_name} ✅\nYour Google Calendar is already connected! You can now book parking spots directly.`,
+      text: `Hi ${user_name} ✅\nYour Google Calendar is already connected! You can now book, check, and cancel parking spots directly.`,
     });
   }
 };

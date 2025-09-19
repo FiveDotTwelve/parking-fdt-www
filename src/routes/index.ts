@@ -25,7 +25,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
 
     await app.client.chat.postMessage({
       channel: slackUserId,
-      text: '✅ Google authorization successful! You can now book your parking spot directly from Slack.',
+      text: '✅ Google authorization successful! You can now book, check, and cancel your parking spot directly from Slack.',
     });
 
     res.sendFile(path.join(__dirname, '..', 'public', 'views', 'auth-success.html'));
@@ -34,7 +34,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
 
     await app.client.chat.postMessage({
       channel: slackUserId,
-      text: '❌ Google authorization failed. You cannot book your parking spot from Slack.',
+      text: '❌ Google authorization failed. You cannot book, check, or cancel your parking spot from Slack.',
     });
 
     res.sendFile(path.join(__dirname, '..', 'public', 'views', 'auth-failed.html'));

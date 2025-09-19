@@ -191,9 +191,7 @@ export const ParkingNext = async (user_id: string, respond: RespondFn) => {
   } else {
     await setCredentialsForUser(user_id);
     const { nextMonday, nextFriday } = getNextWeekRange();
-    console.log(nextMonday, nextFriday);
     const dates = generateWorkweekDates(nextMonday);
-    console.log(dates);
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,
       singleEvents: true,
@@ -214,7 +212,7 @@ export const ParkingNext = async (user_id: string, respond: RespondFn) => {
 
     const parkingColumn = '*Parking:*\n' + PARKING_SLOTS.join('\n');
     const statusColumn =
-      '*[PON][WT][ŚR][CZW][PT]*\n' +
+      '[PON][WT][ŚR][CZW][PT]\n' +
       PARKING_SLOTS.map((slot) => statusLines(dates, takenDays(slot, events))).join('\n');
 
     await respond({
