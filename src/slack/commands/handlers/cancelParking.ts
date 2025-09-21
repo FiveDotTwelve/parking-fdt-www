@@ -1,4 +1,4 @@
-import { calendar, setCredentialsForUser } from '../../../config/google';
+import { calendar, setCredentialsForUser } from '../../../configs/google';
 import { GoogleEvent } from '../../../models/googleEvent';
 import { ENV } from '../../../utils/env';
 import { getToken } from '../../../utils/tokenStorage';

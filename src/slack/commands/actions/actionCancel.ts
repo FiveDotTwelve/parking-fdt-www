@@ -1,5 +1,5 @@
 import { App } from '@slack/bolt';
-import { calendar } from '../../../config/google';
+import { calendar } from '../../../configs/google';
 import { ENV } from '../../../utils/env';
 
 export const ActionCancel = (app: App) => {

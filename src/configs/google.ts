@@ -1,8 +1,8 @@
 import { google } from 'googleapis';
-import { ENV } from '../../utils/env';
+import { ENV } from '../utils/env';
 import dotenv from 'dotenv';
 import path from 'path';
-import { getToken } from '../../utils/tokenStorage';
+import { getToken } from '../utils/tokenStorage';
 dotenv.config();
 
 export const oauth2Client = new google.auth.OAuth2(
@@ -12,8 +12,6 @@ export const oauth2Client = new google.auth.OAuth2(
 );
 
 export const SCOPES = ['https://www.googleapis.com/auth/calendar'];
-
-export const TOKEN_PATH = path.join(__dirname, 'tokens.json');
 
 export const getAuthUrl = (slackUserId: string) =>
   oauth2Client.generateAuthUrl({

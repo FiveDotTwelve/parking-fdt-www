@@ -13,11 +13,8 @@ yarn-error.log*
 # env files
 .env
 .env-local
-
-
-/src/config/google/tokens.json
+#vercel
 .vercel
-
 # dist output
 dist/
 ./dist/

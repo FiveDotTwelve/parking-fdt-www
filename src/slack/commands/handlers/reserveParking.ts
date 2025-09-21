@@ -1,5 +1,5 @@
 import { RespondFn } from '@slack/bolt';
-import { setCredentialsForUser } from '../../../config/google';
+import { setCredentialsForUser } from '../../../configs/google';
 import { getToken } from '../../../utils/tokenStorage';
 import { buildReservationModal } from '../../modals/reservationModal';
 import { initialDate } from '../../../utils/getDate';

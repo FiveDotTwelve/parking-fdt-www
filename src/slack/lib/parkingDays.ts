@@ -2,7 +2,7 @@ import { RespondFn } from '@slack/bolt';
 import { PARKING_SLOTS } from '../constants/parkingSlots';
 import { GoogleEvent } from '../../models/googleEvent';
 import convertCalendarEvent from './convertEvent';
-import { calendar, setCredentialsForUser } from '../../config/google';
+import { calendar, setCredentialsForUser } from '../../configs/google';
 import { ENV } from '../../utils/env';
 import { getToken } from '../../utils/tokenStorage';
 import { initialDate } from '../../utils/getDate';

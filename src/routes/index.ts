@@ -1,7 +1,7 @@
-import { oauth2Client } from '../config/google';
+import { oauth2Client } from '../configs/google';
 import { Router } from 'express';
 import { saveToken } from '../utils/tokenStorage';
-import { app } from '../config/slack';
+import { app } from '../configs/slack';
 import path from 'path';
 
 const authRouter = Router();
@@ -21,7 +21,8 @@ authRouter.get('/auth/google/callback', async (req, res) => {
 
     if (tokens.refresh_token) {
       await saveToken(slackUserId, tokens.refresh_token);
-    } else return;
+      return
+    } 
 
     await app.client.chat.postMessage({
       channel: slackUserId,

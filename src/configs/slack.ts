@@ -1,5 +1,5 @@
 import { App, ExpressReceiver } from '@slack/bolt';
-import { ENV } from '../../utils/env';
+import { ENV } from '../utils/env';
 
 const receiver = new ExpressReceiver({
   signingSecret: ENV.SLACK_SIGNING_SECRET,

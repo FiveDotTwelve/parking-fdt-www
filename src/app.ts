@@ -1,10 +1,10 @@
-import { app, receiver } from './config/slack';
+import { app, receiver } from './configs/slack';
 import { CommandManager } from './slack';
 import authRouter from './routes';
 import express from 'express';
 import path from 'path';
 import { ENV } from './utils/env';
-import redis from './config/redis';
+import redis from './configs/redis';
 
 receiver.app.use('/api', authRouter);
 

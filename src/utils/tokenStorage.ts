@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import redis from '../config/redis';
+import redis from '../configs/redis';
 
 export const saveToken = async (userId: string, tokens: any) => {
   try {

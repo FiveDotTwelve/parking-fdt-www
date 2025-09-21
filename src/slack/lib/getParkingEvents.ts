@@ -1,5 +1,5 @@
-import { calendar } from '../../config/google';
-import { setCredentialsForUser } from '../../config/google';
+import { calendar } from '../../configs/google';
+import { setCredentialsForUser } from '../../configs/google';
 import { GoogleEvent } from '../../models/googleEvent';
 import { ENV } from '../../utils/env';
 
