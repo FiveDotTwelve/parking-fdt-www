@@ -18,7 +18,7 @@ receiver.app.get('/', (req, res) => {
 
 (async () => {
   await app.start(ENV.PORT);
-  console.log('⚡ FDTParkingBot running locally!');
+  console.log('⚡ FDTParking running locally!');
   console.log(`Server running at http://localhost:${ENV.PORT}`);
   redis.on('connect', () => {
     console.log('✅ Connected to Redis');

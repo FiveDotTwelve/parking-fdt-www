@@ -46,7 +46,5 @@ export const generateDates = (start: Date, end: Date): string[] => {
     dates.push(current.toISOString().split('T')[0]);
     current.setDate(current.getDate() + 1);
   }
-
-  console.log(dates);
   return dates;
 };
