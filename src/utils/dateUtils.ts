@@ -1,10 +1,14 @@
 export const GetWeek = (date: Date) => {
   const start = new Date(date);
-  const day = start.getDay() || 5;
-  start.setDate(start.getDate() - (day - 1));
+
+  const day = start.getDay();
+  const diff = start.getDate() - day + (day === 0 ? -6 : 1);
+  start.setDate(diff);
+  start.setHours(12, 0, 0, 0);
 
   const end = new Date(start);
   end.setDate(start.getDate() + 4);
+  end.setHours(23, 59, 59, 999);
 
   return { start, end };
 };
@@ -33,3 +37,16 @@ export const generateWorkweekDates = (monday: Date) =>
     d.setHours(12, 0, 0, 0);
     return d.toISOString().split('T')[0];
   });
+
+export const generateDates = (start: Date, end: Date): string[] => {
+  const dates: string[] = [];
+  const current = new Date(start);
+
+  while (current <= end) {
+    dates.push(current.toISOString().split('T')[0]);
+    current.setDate(current.getDate() + 1);
+  }
+
+  console.log(dates);
+  return dates;
+};

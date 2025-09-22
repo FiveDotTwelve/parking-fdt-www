@@ -45,6 +45,15 @@ export const CancelParking = async (
           a.summary || '',
         ),
       );
+
+    if (parking.length === 0) {
+      await respond({
+        response_type: 'ephemeral',
+        text: 'You have no upcoming parking reservations to cancel.',
+      });
+      return;
+    }
+
     try {
       await client.views.open({
         trigger_id: trigger_id,

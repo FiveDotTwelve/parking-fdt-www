@@ -5,6 +5,7 @@ import { ENV } from '../../../utils/env';
 export const ActionCancel = (app: App) => {
   app.view('submit_parking_reservation_cancellation', async ({ body, ack }) => {
     const formValues = body.view.state.values;
+
     const userId = body.user.id;
 
     const getValue = (actionId: string) =>

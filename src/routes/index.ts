@@ -21,8 +21,8 @@ authRouter.get('/auth/google/callback', async (req, res) => {
 
     if (tokens.refresh_token) {
       await saveToken(slackUserId, tokens.refresh_token);
-      return
-    } 
+      return;
+    }
 
     await app.client.chat.postMessage({
       channel: slackUserId,

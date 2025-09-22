@@ -6,7 +6,12 @@ import { calendar, setCredentialsForUser } from '../../configs/google';
 import { ENV } from '../../utils/env';
 import { getToken } from '../../utils/tokenStorage';
 import { initialDate } from '../../utils/getDate';
-import { generateWorkweekDates, getNextWeekRange, GetWeek } from '../../utils/dateUtils';
+import {
+  generateDates,
+  generateWorkweekDates,
+  getNextWeekRange,
+  GetWeek,
+} from '../../utils/dateUtils';
 import { Parking } from '../models/slackEvent';
 
 export const ParkingToday = async (user_id: string, respond: RespondFn) => {
@@ -91,26 +96,12 @@ export const ParkingWeek = async (user_id: string, respond: RespondFn) => {
 
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,
-      timeMin: start.toISOString(),
       timeMax: end.toISOString(),
       singleEvents: true,
       orderBy: 'startTime',
     });
 
     const today = new Date().toISOString().split('T')[0];
-
-    const generateDates = (start: Date, end: Date): string[] => {
-      const dates: string[] = [];
-      const current = new Date(start);
-
-      while (current <= end) {
-        dates.push(current.toISOString().split('T')[0]);
-        current.setDate(current.getDate() + 1);
-      }
-
-      console.log(dates);
-      return dates;
-    };
 
     const dates = generateDates(start, end);
 
