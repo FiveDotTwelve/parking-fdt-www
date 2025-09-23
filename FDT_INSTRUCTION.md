@@ -112,16 +112,22 @@ Shows which parking slots are taken and available based on the selected time per
 Results for the selected parameter will display a table with taken and available parking slots
 
 Today
+
 <p>
   <img src="src/public/img/tutorial/today.png" alt="FiveDotTwelve — App Development Company">
 </p>
+
 Week
+
 <p>
   <img src="src/public/img/tutorial/week.png" alt="FiveDotTwelve — App Development Company">
 </p>
+
 Past dates are automatically marked as unavailable.
+
 Next
 <p>
   <img src="src/public/img/tutorial/next.png" alt="FiveDotTwelve — App Development Company">
 </p>
+
 
