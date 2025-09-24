@@ -1,7 +1,7 @@
-import { ActionReserve } from './commands/actions/actionReserve';
+import { ActionReserve } from './actions/actionReserve';
 import { ParkingCommand } from './commands/parking';
 import { app } from '../configs/slack';
-import { ActionCancel } from './commands/actions/actionCancel';
+import { ActionCancel } from './actions/actionCancel';
 
 export function CommandManager() {
   ParkingCommand(app);

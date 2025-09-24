@@ -1,6 +1,6 @@
 import { App } from '@slack/bolt';
-import { calendar } from '../../../configs/google';
-import { ENV } from '../../../utils/env';
+import { calendar } from '../../configs/google';
+import { ENV } from '../../utils/env';
 
 export const ActionCancel = (app: App) => {
   app.view('submit_parking_reservation_cancellation', async ({ body, ack }) => {

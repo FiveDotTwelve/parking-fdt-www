@@ -1,10 +1,10 @@
-import { calendar, setCredentialsForUser } from '../../../configs/google';
-import { GoogleEvent } from '../../../models/googleEvent';
-import { ENV } from '../../../utils/env';
-import { getToken } from '../../../utils/tokenStorage';
-import convertCalendarEvent from '../../lib/convertEvent';
-import { GetWeek } from '../../../utils/dateUtils';
-import { buildCancelModal } from '../../modals/cancelModal';
+import { calendar, setCredentialsForUser } from '../../configs/google';
+import { GoogleEvent } from '../../models/googleEvent';
+import { ENV } from '../../utils/env';
+import { getToken } from '../../utils/tokenStorage';
+import convertCalendarEvent from '../lib/convertEvent';
+import { GetWeek } from '../../utils/dateUtils';
+import { buildCancelModal } from '../modals/cancelModal';
 import { WebClient } from '@slack/web-api';
 import { RespondFn } from '@slack/bolt';
 

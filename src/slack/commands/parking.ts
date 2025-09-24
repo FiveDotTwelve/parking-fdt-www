@@ -1,9 +1,9 @@
 import { App } from '@slack/bolt';
-import { LoginParking } from './handlers/loginParking';
-import { HelpParking } from './handlers/helpParking';
-import { ReserveParking } from './handlers/reserveParking';
-import { CancelParking } from './handlers/cancelParking';
-import { ShowParking } from './handlers/showParking';
+import { LoginParking } from '../handlers/loginParking';
+import { HelpParking } from '../handlers/helpParking';
+import { ReserveParking } from '../handlers/reserveParking';
+import { CancelParking } from '../handlers/cancelParking';
+import { ShowParking } from '../handlers/showParking';
 
 export function ParkingCommand(app: App) {
   app.command('/parking', async ({ command, ack, respond, client }) => {

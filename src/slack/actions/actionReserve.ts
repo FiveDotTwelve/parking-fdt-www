@@ -1,7 +1,7 @@
 import { App } from '@slack/bolt';
-import { calendar } from '../../../configs/google';
-import { ENV } from '../../../utils/env';
-import { CheckParkingTaken } from '../../lib/checkParkingTaken';
+import { calendar } from '../../configs/google';
+import { ENV } from '../../utils/env';
+import { CheckParkingTaken } from '../lib/checkParkingTaken';
 
 export const ActionReserve = (app: App) => {
   app.view('submit_parking_reservation', async ({ body, ack }) => {

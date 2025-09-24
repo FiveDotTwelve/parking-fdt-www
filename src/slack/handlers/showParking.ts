@@ -1,5 +1,5 @@
 import { RespondFn, SlashCommand } from '@slack/bolt';
-import { ParkingNext, ParkingToday, ParkingWeek } from '../../lib/parkingDays';
+import { ParkingNext, ParkingToday, ParkingWeek } from '../lib/parkingDays';
 
 export const ShowParking = async (
   target: string,
