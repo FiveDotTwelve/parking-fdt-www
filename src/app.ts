@@ -1,5 +1,5 @@
 import { app, receiver } from './configs/slack';
-import { CommandManager } from './slack';
+import { SlackApp } from './slack';
 import authRouter from './routes';
 import express from 'express';
 import path from 'path';
@@ -7,10 +7,9 @@ import { ENV } from './utils/env';
 import redis from './configs/redis';
 
 receiver.app.use('/api', authRouter);
-
-CommandManager();
-
 receiver.app.use(express.static(path.join(__dirname, 'public')));
+
+SlackApp();
 
 receiver.app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
