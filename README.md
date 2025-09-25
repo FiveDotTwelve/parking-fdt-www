@@ -14,6 +14,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](#)
 [![Redis](https://img.shields.io/badge/Redis-%23DD0031.svg?logo=redis&logoColor=white)](#)
 [![Google](https://img.shields.io/badge/Google-4285F4?logo=google&logoColor=white)](#)
+[![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)
 
 <p>
 ⭐ Star this repository on GitHub — your support motivates me to keep learning and building! 🚀✨
@@ -81,6 +82,8 @@ npm run dev
 ## Issues
 If you encounter any problems during installation or while using FDTParking, please report them in the [Issues](https://github.com/Kubaleek/FDTParking/issues) section on GitHub.  
 Include a description of the problem, and if possible, attach screenshots or error logs to help with troubleshooting.
+
+---
 
 ## License
 
