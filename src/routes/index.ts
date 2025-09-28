@@ -9,6 +9,11 @@ const authRouter = Router();
 authRouter.get('/auth/google/callback', async (req, res) => {
   const code = req.query.code as string;
   const slackUserId = req.query.state as string;
+  console.log('➡️ __dirname:', __dirname);
+  console.log(
+    '➡️ resolved path:',
+    path.join(__dirname, '..', 'public', 'views', 'auth-success.html'),
+  );
 
   if (!code || !slackUserId) {
     return res.status(400).json({ message: 'Missing code or state.' });
@@ -21,7 +26,13 @@ authRouter.get('/auth/google/callback', async (req, res) => {
 
     if (tokens.refresh_token) {
       await saveToken(slackUserId, tokens.refresh_token);
-      return;
+
+      await app.client.chat.postMessage({
+        channel: slackUserId,
+        text: '✅ Google authorization successful! You can now book, check, and cancel your parking spot directly from Slack.',
+      });
+
+      return res.redirect('/views/auth-success.html');
     }
 
     await app.client.chat.postMessage({
@@ -29,7 +40,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
       text: '✅ Google authorization successful! You can now book, check, and cancel your parking spot directly from Slack.',
     });
 
-    res.sendFile(path.join(__dirname, '..', 'public', 'views', 'auth-success.html'));
+    res.redirect('/views/auth-success.html');
   } catch (error) {
     console.error('Google OAuth callback error full:', error);
 
@@ -38,7 +49,7 @@ authRouter.get('/auth/google/callback', async (req, res) => {
       text: '❌ Google authorization failed. You cannot book, check, or cancel your parking spot from Slack.',
     });
 
-    res.sendFile(path.join(__dirname, '..', 'public', 'views', 'auth-failed.html'));
+    res.redirect('/views/auth-failed.html');
   }
 });
 
