@@ -20,6 +20,8 @@ const getAuthUrl = (slackUserId) => exports.oauth2Client.generateAuthUrl({
 exports.getAuthUrl = getAuthUrl;
 const setCredentialsForUser = async (slackUserId) => {
     const token = await (0, tokenStorage_1.getToken)(slackUserId);
+    console.log('token', token);
+    console.log('slackUserId', slackUserId);
     if (!token)
         return;
     if (typeof token === 'string') {
