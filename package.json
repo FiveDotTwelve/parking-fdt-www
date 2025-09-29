@@ -9,12 +9,11 @@
   "scripts": {
     "build": "tsc && copyfiles -u 1 \"src/public/**/*\" dist/",
     "reset": "rmdir /s /q node_modules && del package-lock.json && npm cache clean --force && npm install",
-    "start": "node build/app.js",
+    "start": "node dist/app.js",
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node src/app.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.{ts,json,md}\"",
-    "dev:css": "tailwindcss -i ./src/public/input.css -o ./src/public/output.css --watch",
-    "prepare": "husky"
+    "dev:css": "tailwindcss -i ./src/public/input.css -o ./src/public/output.css --watch"
   },
   "lint-staged": {
     "src/**/*.{ts,js}": [
