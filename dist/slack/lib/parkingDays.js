@@ -35,9 +35,11 @@ const ParkingToday = async (user_id, respond) => {
         });
         console.log('calendar.events.list', data);
         const takenSlots = new Set((data.items || []).map(convertEvent_1.default).map((e) => e.summary));
+        console.log('takenSlots', takenSlots);
         const parkingColumn = '*Parking:*\n' + parkingSlots_1.PARKING_SLOTS.join('\n');
         const statusColumn = '*Status:*\n' +
             parkingSlots_1.PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '[❌]' : '[✅]')).join('\n');
+        console.log('statusColumn', statusColumn);
         await respond({
             response_type: 'in_channel',
             attachments: [

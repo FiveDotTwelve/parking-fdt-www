@@ -44,11 +44,13 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
       ((data.items as GoogleEvent[]) || []).map(convertCalendarEvent).map((e) => e.summary),
     );
 
+    console.log('takenSlots', takenSlots);
     const parkingColumn = '*Parking:*\n' + PARKING_SLOTS.join('\n');
     const statusColumn =
       '*Status:*\n' +
       PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '[❌]' : '[✅]')).join('\n');
 
+    console.log('statusColumn', statusColumn);
     await respond({
       response_type: 'in_channel',
       attachments: [
