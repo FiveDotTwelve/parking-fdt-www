@@ -29,12 +29,14 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
     start.setHours(0, 0, 0, 0);
     const end = new Date();
     end.setHours(23, 59, 59, 999);
+    // Optionally extend end by one day for all-day events
+    end.setDate(end.getDate() + 1);
 
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,
-      // singleEvents: true,
-      // timeMin: start.toISOString(),
-      // timeMax: end.toISOString(),
+      singleEvents: true,
+      timeMin: start.toISOString(),
+      timeMax: end.toISOString(),
       orderBy: 'startTime',
     });
 
