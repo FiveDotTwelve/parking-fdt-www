@@ -28,9 +28,9 @@ const ParkingToday = async (user_id, respond) => {
         end.setHours(23, 59, 59, 999);
         const { data } = await google_1.calendar.events.list({
             calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
-            singleEvents: true,
-            timeMin: start.toISOString(),
-            timeMax: end.toISOString(),
+            // singleEvents: true,
+            // timeMin: start.toISOString(),
+            // timeMax: end.toISOString(),
             orderBy: 'startTime',
         });
         console.log('calendar.events.list', data);
