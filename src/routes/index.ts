@@ -2,18 +2,12 @@ import { oauth2Client } from '../configs/google';
 import { Router } from 'express';
 import { saveToken } from '../utils/tokenStorage';
 import { app } from '../configs/slack';
-import path from 'path';
 
 const authRouter = Router();
 
 authRouter.get('/auth/google/callback', async (req, res) => {
   const code = req.query.code as string;
   const slackUserId = req.query.state as string;
-  console.log('➡️ __dirname:', __dirname);
-  console.log(
-    '➡️ resolved path:',
-    path.join(__dirname, '..', 'public', 'views', 'auth-success.html'),
-  );
 
   if (!code || !slackUserId) {
     return res.status(400).json({ message: 'Missing code or state.' });
