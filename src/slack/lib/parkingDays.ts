@@ -15,6 +15,7 @@ import {
 import { Parking } from '../models/slackEvent';
 
 export const ParkingToday = async (user_id: string, respond: RespondFn) => {
+  console.log('user_id', user_id);
   if (!(await getToken(user_id))) {
     await respond({
       response_type: 'ephemeral',
@@ -36,6 +37,8 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
       timeMax: end.toISOString(),
       orderBy: 'startTime',
     });
+
+    console.log('calendar.events.list', data);
 
     const takenSlots = new Set(
       ((data.items as GoogleEvent[]) || []).map(convertCalendarEvent).map((e) => e.summary),

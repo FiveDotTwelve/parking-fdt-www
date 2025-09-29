@@ -12,6 +12,7 @@ const tokenStorage_1 = require("../../utils/tokenStorage");
 const getDate_1 = require("../../utils/getDate");
 const dateUtils_1 = require("../../utils/dateUtils");
 const ParkingToday = async (user_id, respond) => {
+    console.log('user_id', user_id);
     if (!(await (0, tokenStorage_1.getToken)(user_id))) {
         await respond({
             response_type: 'ephemeral',
@@ -32,6 +33,7 @@ const ParkingToday = async (user_id, respond) => {
             timeMax: end.toISOString(),
             orderBy: 'startTime',
         });
+        console.log('calendar.events.list', data);
         const takenSlots = new Set((data.items || []).map(convertEvent_1.default).map((e) => e.summary));
         const parkingColumn = '*Parking:*\n' + parkingSlots_1.PARKING_SLOTS.join('\n');
         const statusColumn = '*Status:*\n' +
