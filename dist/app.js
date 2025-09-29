@@ -17,7 +17,7 @@ slack_1.receiver.app.get('/', (req, res) => {
     res.sendFile(path_1.default.join(__dirname, 'public', 'views', 'index.html'));
 });
 (async () => {
-    await slack_1.app.start(env_1.ENV.PORT);
+    await slack_1.app.start(env_1.ENV.PORT || 3000);
     console.log('⚡ FDTParking running locally!');
     console.log(`Server running at http://localhost:${env_1.ENV.PORT}`);
     redis_1.default.on('connect', () => {
