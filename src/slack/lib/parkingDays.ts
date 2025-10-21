@@ -112,6 +112,9 @@ export const ParkingWeek = async (user_id: string, respond: RespondFn) => {
 
     const dates = generateDates(start, end);
 
+    console.log('dates', dates);
+    console.log('start, end', start, end);
+
     const takenDays = (slot: string): string[] => {
       return ((data.items as GoogleEvent[]) || [])
         .map(convertCalendarEvent)
