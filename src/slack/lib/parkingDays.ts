@@ -29,8 +29,6 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
     start.setHours(0, 0, 0, 0);
     const end = new Date();
     end.setHours(23, 59, 59, 999);
-    // Optionally extend end by one day for all-day events
-    end.setDate(end.getDate() + 1);
 
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,
@@ -195,6 +193,8 @@ export const ParkingNext = async (user_id: string, respond: RespondFn) => {
   } else {
     await setCredentialsForUser(user_id);
     const { nextMonday, nextFriday } = getNextWeekRange();
+    console.log('nextMonday.toISOString()', nextMonday.toISOString());
+    console.log('nextFriday.toISOString()', nextFriday.toISOString());
     const dates = generateWorkweekDates(nextMonday);
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,

@@ -26,8 +26,6 @@ const ParkingToday = async (user_id, respond) => {
         start.setHours(0, 0, 0, 0);
         const end = new Date();
         end.setHours(23, 59, 59, 999);
-        // Optionally extend end by one day for all-day events
-        end.setDate(end.getDate() + 1);
         const { data } = await google_1.calendar.events.list({
             calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
             singleEvents: true,
@@ -175,6 +173,8 @@ const ParkingNext = async (user_id, respond) => {
     else {
         await (0, google_1.setCredentialsForUser)(user_id);
         const { nextMonday, nextFriday } = (0, dateUtils_1.getNextWeekRange)();
+        console.log('nextMonday.toISOString()', nextMonday.toISOString());
+        console.log('nextFriday.toISOString()', nextFriday.toISOString());
         const dates = (0, dateUtils_1.generateWorkweekDates)(nextMonday);
         const { data } = await google_1.calendar.events.list({
             calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
