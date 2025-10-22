@@ -1,4 +1,4 @@
-import { calendar, setCredentialsForUser } from '../../configs/google';
+import { calendar, setCredentialsForUser, getLoggedUser } from '../../configs/google';
 import { GoogleEvent } from '../../models/googleEvent';
 import { ENV } from '../../utils/env';
 import { getToken } from '../../utils/tokenStorage';
@@ -38,14 +38,7 @@ export const CancelParking = async (
       orderBy: 'startTime',
     });
 
-    const getUserEmail = async () => {
-      const dataList = await calendar.calendarList.list();
-      console.log(dataList);
-      return dataList.data.items?.[0].id; // Primary calendar ID is the user's email
-    };
-
-    const userEmail = await getUserEmail();
-    console.log('userEmail', userEmail);
+    console.log('userEmail', await getLoggedUser(user_id));
 
     // Step 1: Get the user's own email
     const parking = ((data.items as GoogleEvent[]) || [])

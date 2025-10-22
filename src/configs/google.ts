@@ -34,3 +34,16 @@ export const setCredentialsForUser = async (slackUserId: string) => {
 };
 
 export const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
+
+export const getLoggedUser = async (slackUserId: string) => {
+  await setCredentialsForUser(slackUserId);
+
+  const calendarList = await calendar.calendarList.get({
+    calendarId: 'primary',
+  });
+
+  return {
+    email: calendarList.data.id,
+    summary: calendarList.data.summary,
+  };
+};
