@@ -25,10 +25,13 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
   } else {
     await setCredentialsForUser(user_id);
 
-    const start = new Date();
-    start.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayDate = today.toISOString().split('T')[0];
+
+    const start = new Date(today);
     start.setDate(start.getDate() - 1);
-    const end = new Date();
+    const end = new Date(today);
     end.setDate(end.getDate() + 1);
 
     const { data } = await calendar.events.list({
@@ -40,8 +43,6 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
     });
 
     console.log('calendar.events.list', data);
-
-    const todayDate = start.toISOString().split('T')[0];
 
     const takenSlots = new Set(
       ((data.items as GoogleEvent[]) || [])

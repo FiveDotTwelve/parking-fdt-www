@@ -22,10 +22,12 @@ const ParkingToday = async (user_id, respond) => {
     }
     else {
         await (0, google_1.setCredentialsForUser)(user_id);
-        const start = new Date();
-        start.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const todayDate = today.toISOString().split('T')[0];
+        const start = new Date(today);
         start.setDate(start.getDate() - 1);
-        const end = new Date();
+        const end = new Date(today);
         end.setDate(end.getDate() + 1);
         const { data } = await google_1.calendar.events.list({
             calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
@@ -35,7 +37,6 @@ const ParkingToday = async (user_id, respond) => {
             orderBy: 'startTime',
         });
         console.log('calendar.events.list', data);
-        const todayDate = start.toISOString().split('T')[0];
         const takenSlots = new Set((data.items || [])
             .map(convertEvent_1.default)
             .filter((e) => e.start === todayDate)
