@@ -38,7 +38,10 @@ export const CancelParking = async (
       orderBy: 'startTime',
     });
 
-    console.log('User email:', await calendar.settings.get({ setting: 'id' }));
+    // Step 1: Get the user's own email
+    const { data: user } = await calendar.settings.get({ setting: 'id' });
+    const userEmail = user.value;
+    console.log('userEmail', userEmail);
 
     const parking = ((data.items as GoogleEvent[]) || [])
       .map(convertCalendarEvent)
