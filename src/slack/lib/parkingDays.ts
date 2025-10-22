@@ -28,7 +28,7 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
     const start = new Date();
     start.setHours(0, 0, 0, 0);
     const end = new Date();
-    end.setHours(23, 59, 59, 999);
+    end.setDate(end.getDate() + 1);
 
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,
