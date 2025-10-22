@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.calendar = exports.setCredentialsForUser = exports.getAuthUrl = exports.SCOPES = exports.oauth2Client = void 0;
+exports.getLoggedUser = exports.calendar = exports.setCredentialsForUser = exports.getAuthUrl = exports.SCOPES = exports.oauth2Client = void 0;
 const googleapis_1 = require("googleapis");
 const env_1 = require("../utils/env");
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -33,3 +33,14 @@ const setCredentialsForUser = async (slackUserId) => {
 };
 exports.setCredentialsForUser = setCredentialsForUser;
 exports.calendar = googleapis_1.google.calendar({ version: 'v3', auth: exports.oauth2Client });
+const getLoggedUser = async (slackUserId) => {
+    await (0, exports.setCredentialsForUser)(slackUserId);
+    const calendarList = await exports.calendar.calendarList.get({
+        calendarId: 'primary',
+    });
+    return {
+        email: calendarList.data.id,
+        summary: calendarList.data.summary,
+    };
+};
+exports.getLoggedUser = getLoggedUser;
