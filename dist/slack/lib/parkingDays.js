@@ -34,8 +34,11 @@ const ParkingToday = async (user_id, respond) => {
             orderBy: 'startTime',
         });
         console.log('calendar.events.list', data);
-        const takenSlots = new Set((data.items || []).map(convertEvent_1.default).map((e) => e.summary));
-        console.log('takenSlots', takenSlots);
+        const todayDate = start.toISOString().split('T')[0];
+        const takenSlots = new Set((data.items || [])
+            .map(convertEvent_1.default)
+            .filter((e) => e.start === todayDate)
+            .map((e) => e.summary));
         const parkingColumn = '*Parking:*\n' + parkingSlots_1.PARKING_SLOTS.join('\n');
         const statusColumn = '*Status:*\n' +
             parkingSlots_1.PARKING_SLOTS.map((slot) => (takenSlots.has(slot) ? '[❌]' : '[✅]')).join('\n');

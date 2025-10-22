@@ -40,11 +40,15 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
 
     console.log('calendar.events.list', data);
 
+    const todayDate = start.toISOString().split('T')[0];
+
     const takenSlots = new Set(
-      ((data.items as GoogleEvent[]) || []).map(convertCalendarEvent).map((e) => e.summary),
+      ((data.items as GoogleEvent[]) || [])
+        .map(convertCalendarEvent)
+        .filter((e) => e.start === todayDate)
+        .map((e) => e.summary),
     );
 
-    console.log('takenSlots', takenSlots);
     const parkingColumn = '*Parking:*\n' + PARKING_SLOTS.join('\n');
     const statusColumn =
       '*Status:*\n' +
