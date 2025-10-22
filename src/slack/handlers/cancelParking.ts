@@ -38,11 +38,16 @@ export const CancelParking = async (
       orderBy: 'startTime',
     });
 
-    // Step 1: Get the user's own email
-    const { data: user } = await calendar.settings.get({ setting: 'id' });
-    const userEmail = user.value;
+    const getUserEmail = async () => {
+      const dataList = await calendar.calendarList.list();
+      console.log(dataList);
+      return dataList.data.items?.[0].id; // Primary calendar ID is the user's email
+    };
+
+    const userEmail = await getUserEmail();
     console.log('userEmail', userEmail);
 
+    // Step 1: Get the user's own email
     const parking = ((data.items as GoogleEvent[]) || [])
       .map(convertCalendarEvent)
       .filter((a) =>
