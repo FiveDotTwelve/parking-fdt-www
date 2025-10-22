@@ -24,6 +24,7 @@ const ParkingToday = async (user_id, respond) => {
         await (0, google_1.setCredentialsForUser)(user_id);
         const start = new Date();
         start.setHours(0, 0, 0, 0);
+        start.setDate(start.getDate() - 1);
         const end = new Date();
         end.setDate(end.getDate() + 1);
         const { data } = await google_1.calendar.events.list({
