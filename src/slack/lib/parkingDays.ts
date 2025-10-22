@@ -103,6 +103,7 @@ export const ParkingWeek = async (user_id: string, respond: RespondFn) => {
 
     const { data } = await calendar.events.list({
       calendarId: ENV.GOOGLE_CALENDAR_ID,
+      timeMin: start.toISOString(),
       timeMax: end.toISOString(),
       singleEvents: true,
       orderBy: 'startTime',
@@ -124,8 +125,10 @@ export const ParkingWeek = async (user_id: string, respond: RespondFn) => {
     };
 
     const statusLines = (parkings_days: string[]): string => {
+      console.log('parkings_days', parkings_days);
       return dates
         .map((date) => {
+          console.log('date: ', date, 'today: ', today, parkings_days.includes(date));
           if (date < today) return '[❌]';
           return parkings_days.includes(date) ? '[❌]' : '[✅]';
         })

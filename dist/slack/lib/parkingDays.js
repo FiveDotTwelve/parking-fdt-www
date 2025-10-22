@@ -91,6 +91,7 @@ const ParkingWeek = async (user_id, respond) => {
         const { start, end } = (0, dateUtils_1.GetWeek)(new Date());
         const { data } = await google_1.calendar.events.list({
             calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
+            timeMin: start.toISOString(),
             timeMax: end.toISOString(),
             singleEvents: true,
             orderBy: 'startTime',
@@ -107,8 +108,10 @@ const ParkingWeek = async (user_id, respond) => {
                 .filter(Boolean);
         };
         const statusLines = (parkings_days) => {
+            console.log('parkings_days', parkings_days);
             return dates
                 .map((date) => {
+                console.log('date: ', date, 'today: ', today, parkings_days.includes(date));
                 if (date < today)
                     return '[❌]';
                 return parkings_days.includes(date) ? '[❌]' : '[✅]';
