@@ -179,11 +179,17 @@ const ParkingNext = async (user_id, respond) => {
         console.log('nextMonday.toISOString()', nextMonday.toISOString());
         console.log('nextFriday.toISOString()', nextFriday.toISOString());
         const dates = (0, dateUtils_1.generateWorkweekDates)(nextMonday);
+        // Extend timeMin by one day back to catch all-day events starting on Monday
+        const timeMin = new Date(nextMonday);
+        timeMin.setDate(timeMin.getDate() - 1);
+        // Extend timeMax by one day forward to catch all-day events ending on Friday
+        const timeMax = new Date(nextFriday);
+        timeMax.setDate(timeMax.getDate() + 1);
         const { data } = await google_1.calendar.events.list({
             calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
             singleEvents: true,
-            timeMin: nextMonday.toISOString(),
-            timeMax: nextFriday.toISOString(),
+            timeMin: timeMin.toISOString(),
+            timeMax: timeMax.toISOString(),
             timeZone: 'Europe/Warsaw',
             orderBy: 'startTime',
         });
