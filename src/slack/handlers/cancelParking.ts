@@ -38,10 +38,11 @@ export const CancelParking = async (
       orderBy: 'startTime',
     });
 
-    console.log('userEmail', await getLoggedUser(user_id));
+    const loggedUser = await getLoggedUser(user_id);
 
     // Step 1: Get the user's own email
     const parking = ((data.items as GoogleEvent[]) || [])
+      .filter((a) => a.creator?.email === loggedUser.email)
       .map(convertCalendarEvent)
       .filter((a) =>
         ['FDT Parking 7', 'FDT Parking 8', 'FDT Parking 9', 'FDT Parking MOL'].includes(

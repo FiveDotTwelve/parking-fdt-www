@@ -32,9 +32,10 @@ const CancelParking = async (user_id, client, trigger_id, respond) => {
             timeMax: end.toISOString(),
             orderBy: 'startTime',
         });
-        console.log('userEmail', await (0, google_1.getLoggedUser)(user_id));
+        const loggedUser = await (0, google_1.getLoggedUser)(user_id);
         // Step 1: Get the user's own email
         const parking = (data.items || [])
+            .filter((a) => a.creator?.email === loggedUser.email)
             .map(convertEvent_1.default)
             .filter((a) => ['FDT Parking 7', 'FDT Parking 8', 'FDT Parking 9', 'FDT Parking MOL'].includes(a.summary || ''));
         if (parking.length === 0) {
