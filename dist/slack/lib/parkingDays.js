@@ -58,7 +58,7 @@ const ParkingToday = async (user_id, respond) => {
                                             type: 'text',
                                             text: 'List of available and taken parking slot on ',
                                         },
-                                        { type: 'text', text: getDate_1.initialDate, style: { bold: true } },
+                                        { type: 'text', text: (0, getDate_1.getInitialDate)(), style: { bold: true } },
                                     ],
                                 },
                             ],
@@ -97,6 +97,8 @@ const ParkingWeek = async (user_id, respond) => {
         });
         const today = new Date().toISOString().split('T')[0];
         const dates = (0, dateUtils_1.generateDates)(start, end);
+        console.log('dates', dates);
+        console.log('start, end', start, end);
         const takenDays = (slot) => {
             return (data.items || [])
                 .map(convertEvent_1.default)

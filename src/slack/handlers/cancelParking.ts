@@ -38,6 +38,8 @@ export const CancelParking = async (
       orderBy: 'startTime',
     });
 
+    console.log('User email:', await calendar.settings.get({ setting: 'id' }));
+
     const parking = ((data.items as GoogleEvent[]) || [])
       .map(convertCalendarEvent)
       .filter((a) =>

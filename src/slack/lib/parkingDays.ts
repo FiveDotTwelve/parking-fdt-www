@@ -5,7 +5,7 @@ import convertCalendarEvent from './convertEvent';
 import { calendar, setCredentialsForUser } from '../../configs/google';
 import { ENV } from '../../utils/env';
 import { getToken } from '../../utils/tokenStorage';
-import { initialDate } from '../../utils/getDate';
+import { getInitialDate } from '../../utils/getDate';
 import {
   generateDates,
   generateWorkweekDates,
@@ -69,7 +69,7 @@ export const ParkingToday = async (user_id: string, respond: RespondFn) => {
                       type: 'text',
                       text: 'List of available and taken parking slot on ',
                     },
-                    { type: 'text', text: initialDate, style: { bold: true } },
+                    { type: 'text', text: getInitialDate(), style: { bold: true } },
                   ],
                 },
               ],

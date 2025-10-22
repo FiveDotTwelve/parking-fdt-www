@@ -18,7 +18,7 @@ const ReserveParking = async (user_id, client, trigger_id, respond) => {
         try {
             await client.views.open({
                 trigger_id: trigger_id,
-                view: (0, reservationModal_1.buildReservationModal)(getDate_1.initialDate),
+                view: (0, reservationModal_1.buildReservationModal)((0, getDate_1.getInitialDate)()),
             });
         }
         catch (error) {
