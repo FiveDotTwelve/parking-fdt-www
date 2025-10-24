@@ -263,8 +263,10 @@ const ParkingMy = async (user_id, respond) => {
             timeZone: 'Europe/Warsaw',
             orderBy: 'startTime',
         });
-        const events = (data.items || []).filter((e) => e.creator?.email === loggedUser.email).map(convertEvent_1.default);
         const loggedUser = await (0, google_1.getLoggedUser)(user_id);
+        const events = (data.items || [])
+            .filter((e) => e.creator?.email === loggedUser.email)
+            .map(convertEvent_1.default);
         // Step 5: Prepare a readable list (e.g. "Mon 21.10 – Parking 7")
         const myReservations = events
             .map((e) => {

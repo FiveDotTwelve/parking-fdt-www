@@ -296,11 +296,11 @@ export const ParkingMy = async (user_id: string, respond: RespondFn) => {
       orderBy: 'startTime',
     });
 
+    const loggedUser = await getLoggedUser(user_id);
+
     const events = ((data.items as GoogleEvent[]) || [])
       .filter((e) => e.creator?.email === loggedUser.email)
       .map(convertCalendarEvent);
-
-    const loggedUser = await getLoggedUser(user_id);
 
     // Step 5: Prepare a readable list (e.g. "Mon 21.10 – Parking 7")
     const myReservations = events
