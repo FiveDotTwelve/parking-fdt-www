@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ParkingNext = exports.ParkingWeek = exports.ParkingToday = void 0;
+exports.ParkingMy = exports.ParkingNext = exports.ParkingWeek = exports.ParkingToday = void 0;
 const parkingSlots_1 = require("../constants/parkingSlots");
 const convertEvent_1 = __importDefault(require("./convertEvent"));
 const google_1 = require("../../configs/google");
@@ -243,3 +243,68 @@ const ParkingNext = async (user_id, respond) => {
     }
 };
 exports.ParkingNext = ParkingNext;
+const ParkingMy = async (user_id, respond) => {
+    if (!(await (0, tokenStorage_1.getToken)(user_id))) {
+        await respond({
+            response_type: 'ephemeral',
+            text: 'You must be logged in via Google Auth. Use the `/parking login` command.',
+        });
+        return;
+    }
+    else {
+        await (0, google_1.setCredentialsForUser)(user_id);
+        // Extend timeMin by one day back to catch all-day events starting on Monday
+        const timeMin = new Date();
+        timeMin.setDate(timeMin.getDate() - 1);
+        const { data } = await google_1.calendar.events.list({
+            calendarId: env_1.ENV.GOOGLE_CALENDAR_ID,
+            singleEvents: true,
+            timeMin: timeMin.toISOString(),
+            timeZone: 'Europe/Warsaw',
+            orderBy: 'startTime',
+        });
+        const events = (data.items || []).filter((e) => e.creator?.email === loggedUser.email).map(convertEvent_1.default);
+        const loggedUser = await (0, google_1.getLoggedUser)(user_id);
+        // Step 5: Prepare a readable list (e.g. "Mon 21.10 – Parking 7")
+        const myReservations = events
+            .map((e) => {
+            const date = new Date(e.start).toLocaleDateString('pl-PL', {
+                weekday: 'short',
+                day: '2-digit',
+                month: '2-digit',
+            });
+            return `• ${date} – ${e.summary}`;
+        })
+            .join('\n');
+        const messageText = myReservations.length > 0
+            ? `*Your future parking reservations:*\n${myReservations}`
+            : `You have no parking reservations.`;
+        await respond({
+            response_type: 'in_channel',
+            attachments: [
+                {
+                    color: '#E42930',
+                    blocks: [
+                        {
+                            type: 'rich_text',
+                            elements: [
+                                {
+                                    type: 'rich_text_section',
+                                    elements: [
+                                        {
+                                            type: 'text',
+                                            text: `${messageText}`,
+                                            style: { bold: true },
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        { type: 'divider' },
+                    ],
+                },
+            ],
+        });
+    }
+};
+exports.ParkingMy = ParkingMy;

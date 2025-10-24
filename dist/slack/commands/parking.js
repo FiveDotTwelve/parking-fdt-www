@@ -26,6 +26,9 @@ function ParkingCommand(app) {
             case 'show':
                 await (0, showParking_1.ShowParking)(target, command, command.user_id, respond);
                 break;
+            case 'my':
+                await (0, showParking_1.ShowParking)(target, command, command.user_id, respond);
+                break;
             default:
                 await respond({
                     response_type: 'ephemeral',

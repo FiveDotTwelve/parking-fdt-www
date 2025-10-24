@@ -95,6 +95,9 @@ const ShowParking = async (target, commandArgs, user_id, respond) => {
             case 'next':
                 await (0, parkingDays_1.ParkingNext)(commandArgs.user_id, respond);
                 break;
+            case 'my':
+                await (0, parkingDays_1.ParkingMy)(commandArgs.user_id, respond);
+                break;
             default:
                 await respond({
                     response_type: 'ephemeral',

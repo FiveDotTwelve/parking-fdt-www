@@ -1,5 +1,5 @@
 import { RespondFn, SlashCommand } from '@slack/bolt';
-import { ParkingNext, ParkingToday, ParkingWeek } from '../lib/parkingDays';
+import { ParkingNext, ParkingToday, ParkingWeek, ParkingMy } from '../lib/parkingDays';
 
 export const ShowParking = async (
   target: string,
@@ -97,6 +97,9 @@ export const ShowParking = async (
         break;
       case 'next':
         await ParkingNext(commandArgs.user_id, respond);
+        break;
+      case 'my':
+        await ParkingMy(commandArgs.user_id, respond);
         break;
       default:
         await respond({

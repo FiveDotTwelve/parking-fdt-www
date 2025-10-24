@@ -96,7 +96,7 @@ const HelpParking = async (respond) => {
                                         elements: [
                                             {
                                                 type: 'text',
-                                                text: '/parking show [ today | week | next ] ',
+                                                text: '/parking show [ today | week | next | my ] ',
                                             },
                                             {
                                                 type: 'text',

@@ -27,6 +27,9 @@ export function ParkingCommand(app: App) {
       case 'show':
         await ShowParking(target, command, command.user_id, respond);
         break;
+      case 'my':
+        await ShowParking(target, command, command.user_id, respond);
+        break;
       default:
         await respond({
           response_type: 'ephemeral',
