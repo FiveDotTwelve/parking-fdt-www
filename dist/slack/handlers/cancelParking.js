@@ -37,7 +37,7 @@ const CancelParking = async (user_id, client, trigger_id, respond) => {
         const parking = (data.items || [])
             .filter((a) => a.creator?.email === loggedUser.email)
             .map(convertEvent_1.default)
-            .filter((a) => ['FDT Parking 7', 'FDT Parking 8', 'FDT Parking 9', 'FDT Parking MOL'].includes(a.summary || ''));
+            .filter((a) => ['FDT Parking 7', 'FDT Parking 8', 'FDT Parking 9'].includes(a.summary || ''));
         if (parking.length === 0) {
             await respond({
                 response_type: 'ephemeral',
