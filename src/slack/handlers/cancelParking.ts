@@ -44,11 +44,7 @@ export const CancelParking = async (
     const parking = ((data.items as GoogleEvent[]) || [])
       .filter((a) => a.creator?.email === loggedUser.email)
       .map(convertCalendarEvent)
-      .filter((a) =>
-        ['FDT Parking 7', 'FDT Parking 8', 'FDT Parking 9', 'FDT Parking MOL'].includes(
-          a.summary || '',
-        ),
-      );
+      .filter((a) => ['FDT Parking 7', 'FDT Parking 8', 'FDT Parking 9'].includes(a.summary || ''));
 
     if (parking.length === 0) {
       await respond({

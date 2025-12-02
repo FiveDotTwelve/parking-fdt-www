@@ -65,7 +65,6 @@ Users can select parking slots only from a predefined list.
 - FDT Parking 7
 - FDT Parking 8
 - FDT Parking 9
-- FDT Parking MOL
 
 The modal window includes basic validations. Here are some examples:
 
